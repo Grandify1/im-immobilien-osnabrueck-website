@@ -1,0 +1,162 @@
+{
+  "version": 4,
+  "engine": "react-gsap",
+  "slug": "im-immobilien-osnabrueck-pk9s",
+  "created": "2026-02-24T16:38:18.897Z",
+  "companyName": "Im-immobilien Osnabrück",
+  "industry": "Immobilienmakler",
+  "location": "Osnabrück",
+  "mood": "warm-natural",
+  "preset": "warm-natural",
+  "isDark": false,
+  "colors": {
+    "bg": "#FAF7F2",
+    "bgAlt": "#F0EDE6",
+    "text": "#2C2418",
+    "textSecondary": "#6B5D4F",
+    "cardBg": "#FFFFFF",
+    "border": "rgba(44,36,24,0.08)",
+    "accent": "#B87333",
+    "accentRgb": "184, 115, 51",
+    "accentText": "#111111"
+  },
+  "fonts": {
+    "heading": "DM Serif Display",
+    "body": "Source Sans 3",
+    "drama": "Cormorant Garamond"
+  },
+  "sections": [
+    "navbar",
+    "hero",
+    "features",
+    "services",
+    "philosophy",
+    "process",
+    "testimonials",
+    "faq",
+    "cta",
+    "footer"
+  ],
+  "assets": {
+    "hero-main": {
+      "imageUrl": "https://lh3.googleusercontent.com/d/1XMY7dLbaOdqbdUDZNbGj1pYxJGgDwjSV",
+      "driveFileId": "1XMY7dLbaOdqbdUDZNbGj1pYxJGgDwjSV",
+      "usedInSection": "hero",
+      "success": true
+    },
+    "service-1": {
+      "imageUrl": "https://lh3.googleusercontent.com/d/1c0eTzCZUGLJlnGRF9K_Nqafs-mLw30eK",
+      "driveFileId": "1c0eTzCZUGLJlnGRF9K_Nqafs-mLw30eK",
+      "usedInSection": "services",
+      "success": true
+    },
+    "service-2": {
+      "imageUrl": "https://lh3.googleusercontent.com/d/1QaV6lx3sEyGgXuIclhiIZVmoqAVirwrB",
+      "driveFileId": "1QaV6lx3sEyGgXuIclhiIZVmoqAVirwrB",
+      "usedInSection": "services",
+      "success": true
+    },
+    "service-3": {
+      "imageUrl": "https://lh3.googleusercontent.com/d/1JJ_1ZDuJwSBDRdNn_6-dOe3mTomvJ6Un",
+      "driveFileId": "1JJ_1ZDuJwSBDRdNn_6-dOe3mTomvJ6Un",
+      "usedInSection": "services",
+      "success": true
+    },
+    "service-4": {
+      "imageUrl": "https://lh3.googleusercontent.com/d/1LBk778aRVRXrlH0lhbEeB5BV6VIcKK75",
+      "driveFileId": "1LBk778aRVRXrlH0lhbEeB5BV6VIcKK75",
+      "usedInSection": "services",
+      "success": true
+    }
+  },
+  "brief": {
+    "companyName": "Im-immobilien Osnabrück",
+    "industry": "Immobilienmakler",
+    "location": "Osnabrück",
+    "mood": "warm-natural",
+    "tagline": "Ihr zuverlässiger Partner für Immobilien in Osnabrück",
+    "services": [
+      {
+        "name": "Immobilienbewertung",
+        "description": "Präzise Wertermittlung Ihrer Immobilie durch erfahrene Gutachter"
+      },
+      {
+        "name": "Verkauf & Vermarktung",
+        "description": "Professionelle Vermarktung mit hochwertigen Exposés und breiter Reichweite"
+      },
+      {
+        "name": "Kaufberatung",
+        "description": "Persönliche Begleitung bei der Suche nach Ihrer Traumimmobilie"
+      },
+      {
+        "name": "Mietverwaltung",
+        "description": "Zuverlässige Verwaltung Ihrer Mietobjekte und Mieterbetreuung"
+      },
+      {
+        "name": "Finanzierungsberatung",
+        "description": "Individuelle Finanzierungslösungen mit unseren Bankpartnern"
+      }
+    ],
+    "stats": [
+      {
+        "value": "15+",
+        "label": "Jahre Erfahrung"
+      },
+      {
+        "value": "500+",
+        "label": "Vermittelte Objekte"
+      },
+      {
+        "value": "4.9",
+        "label": "Google Sterne"
+      },
+      {
+        "value": "98%",
+        "label": "Kundenzufriedenheit"
+      }
+    ],
+    "testimonials": [
+      {
+        "name": "Thomas Berger",
+        "role": "Verkäufer",
+        "quote": "Dank der professionellen Vermarktung wurde mein Haus innerhalb von 4 Wochen verkauft — über dem Angebotspreis."
+      },
+      {
+        "name": "Sandra Meier",
+        "role": "Käuferin",
+        "quote": "Die persönliche Beratung war hervorragend. Wir haben unsere Traumwohnung gefunden."
+      },
+      {
+        "name": "Klaus Hoffmann",
+        "role": "Investor",
+        "quote": "Seit Jahren mein vertrauensvoller Partner für Immobilieninvestments. Absolute Empfehlung."
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Wie läuft der Verkaufsprozess ab?",
+        "answer": "Nach der kostenlosen Erstberatung erstellen wir eine Marktanalyse, professionelle Fotos und ein Exposé. Dann vermarkten wir Ihre Immobilie über alle relevanten Kanäle."
+      },
+      {
+        "question": "Was kostet eine Immobilienbewertung?",
+        "answer": "Die erste Einschätzung ist bei uns kostenlos. Ein detailliertes Wertgutachten erstellen wir auf Anfrage zu fairen Konditionen."
+      },
+      {
+        "question": "Wie lange dauert ein Immobilienverkauf?",
+        "answer": "Im Durchschnitt vermitteln wir Objekte innerhalb von 6-12 Wochen. Das hängt von Lage, Zustand und Marktlage ab."
+      },
+      {
+        "question": "Welche Unterlagen benötige ich für den Verkauf?",
+        "answer": "Grundbuchauszug, Energieausweis, Grundrisse, Wohnflächenberechnung und Baupläne. Wir helfen Ihnen bei der Beschaffung."
+      },
+      {
+        "question": "Bieten Sie auch Mietverwaltung an?",
+        "answer": "Ja, wir übernehmen die komplette Verwaltung Ihrer Mietobjekte — von der Mietersuche bis zur Nebenkostenabrechnung."
+      }
+    ],
+    "ctaText": "Jetzt anfragen"
+  },
+  "geminiModel": "gemini-3.1-pro-preview",
+  "geminiTime": 214.7,
+  "previewUrl": "http://152.53.182.209/im-immobilien-osnabrueck-pk9s/"
+}
