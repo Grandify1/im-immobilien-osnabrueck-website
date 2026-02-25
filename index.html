@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Im-immobilien Osnabrück | Ihr zuverlässiger Partner für Immobilien in Osnabrück</title>
+  <meta name="description" content="Im-immobilien Osnabrück — Immobilienmakler in Osnabrück">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#FAF7F2">
+  <meta name="openclaw-project" content="im-immobilien-osnabrueck-pk9s">
+  <meta name="openclaw-version" content="4">
+  <meta name="openclaw-engine" content="react-gsap">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"brand":{"DEFAULT":"#B87333","text":"#111111","light":"rgba(184, 115, 51,0.15)","glow":"rgba(184, 115, 51,0.08)"},"surface":{"DEFAULT":"#FAF7F2","alt":"#F0EDE6","card":"#FFFFFF"},"content":{"DEFAULT":"#2C2418","secondary":"#6B5D4F"},"card-border":"rgba(44,36,24,0.08)"},"fontFamily":{"heading":["'DM Serif Display'","system-ui","sans-serif"],"body":["'Source Sans 3'","system-ui","sans-serif"],"drama":["'Cormorant Garamond'","Georgia","Times New Roman","serif"]}}}}</script>
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-body antialiased overflow-x-hidden" style="background:#FAF7F2;color:#2C2418">
+  <div id="root"></div>
+  
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"></script>
+  
+  <script type="text/babel" data-type="module">
+const App = () => {
+  const { useState, useEffect, useRef, useCallback } = React;
+  gsap.registerPlugin(ScrollTrigger);
+
+  // --- GLOBAL STATE ---
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // --- ICONS (Wrapped as requested) ---
+  const IconMapPin = () => (
+    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
+      <><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></></svg>
+  );
+  const IconStar = () => (
+    <svg viewBox="0 0 24 24" width={24} height={24} fill="currentColor" stroke="none" strokeWidth="2">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  );
+  const IconCheck = () => (
+    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  );
+  const IconArrowRight = () => (
+    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 12h16m-7-7l7 7-7 7" />
+    </svg>
+  );
+  const IconPlus = () => (
+    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+    </svg>
+  );
+  const IconMinus = () => (
+    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
+    </svg>
+  );
+  const IconKey = () => (
+    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
+    </svg>
+  );
+  const IconChart = () => (
+    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
+    </svg>
+  );
+
+  // --- COMPONENTS ---
+
+  const NoiseOverlay = () => (
+    <div className="fixed inset-0 z-[9999] pointer-events-none opacity-[0.03] mix-blend-multiply">
+      <svg width="100%" height="100%">
+        <filter id="noiseFilter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+      </svg>
+    </div>
+  );
+
+  const Navbar = () => {
+    return (
+      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'py-4 bg-[#FAF7F2]/90 backdrop-blur-md shadow-sm' : 'py-6 bg-transparent'}`}>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+          <div className="font-heading text-2xl tracking-wide text-[#2C2418]">
+            Im-immobilien<span className="text-[#B87333]">.</span>
+          </div>
+          <div className="hidden md:flex gap-8 items-center text-[#6B5D4F] font-body text-sm uppercase tracking-widest font-semibold">
+            <a href="#leistungen" className="hover:text-[#B87333] transition-colors">Leistungen</a>
+            <a href="#prozess" className="hover:text-[#B87333] transition-colors">Ablauf</a>
+            <a href="#faq" className="hover:text-[#B87333] transition-colors">FAQ</a>
+          </div>
+          <button className="bg-[#2C2418] text-[#FAF7F2] px-6 py-2.5 rounded-none font-body text-sm uppercase tracking-wider hover:bg-[#B87333] transition-colors duration-300">
+            Kontakt
+          </button>
+        </div>
+      </nav>
+    );
+  };
+
+  const Hero = () => {
+    return (
+      <section className="relative min-h-screen flex flex-col lg:flex-row items-stretch bg-[#FAF7F2] overflow-hidden">
+
+        {/* Left Content Side */}
+        <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-12 lg:py-0 relative z-10 order-2 lg:order-1">
+          <div className="hero-content w-full max-w-xl mx-auto lg:mx-0">
+            <h1 className="font-heading text-5xl md:text-7xl lg:text-[5rem] leading-[1.05] text-[#2C2418] mb-8 hero-fade-in" style={{animationDelay: '0.1s'}}>
+              Finden Sie Ihr <br />
+              <span className="font-drama italic text-[#B87333] pr-2">perfektes Zuhause</span> <br />
+              bei uns.
+            </h1>
+            
+            <p className="font-body text-lg md:text-xl text-[#6B5D4F] mb-10 leading-relaxed max-w-lg hero-fade-in" style={{animationDelay: '0.25s'}}>
+              Entdecken Sie handverlesene Immobilien, Expertenberatung und einen reibungslosen Ablauf – egal ob Sie kaufen, verkaufen oder investieren möchten.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 mb-16 hero-fade-in" style={{animationDelay: '0.4s'}}>
+              <button className="group relative inline-flex items-center justify-center px-10 py-4 bg-[#2C2418] text-white font-body text-sm uppercase tracking-widest font-semibold overflow-hidden transition-all hover:bg-[#B87333] shadow-lg hover:shadow-[#B87333]/20">
+                <span className="relative z-10 flex items-center gap-3">
+                  Objekte ansehen <span className="group-hover:translate-x-1 transition-transform"><IconArrowRight /></span>
+                </span>
+              </button>
+            </div>
+
+            {/* Trust Indicators / Avatars */}
+            <div className="flex items-center gap-6 hero-avatars hero-fade-in" style={{animationDelay: '0.55s'}}>
+              <div className="flex -space-x-4">
+                {[
+                  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100",
+                  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&h=100",
+                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100",
+                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100"
+                ].map((src, i) => (
+                  <div key={i} className="w-12 h-12 rounded-full border-2 border-[#FAF7F2] overflow-hidden bg-[#E8E3D9] relative shadow-sm">
+                    <img 
+                      src={src} 
+                      alt="Kunde" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+                <div className="w-12 h-12 rounded-full border-2 border-[#FAF7F2] bg-[#2C2418] text-[#FAF7F2] flex items-center justify-center font-heading text-sm pt-1 shadow-sm">
+                  500+
+                </div>
+              </div>
+              
+              <div className="flex flex-col justify-center">
+                <div className="flex text-[#B87333] gap-0.5 text-sm mb-1">
+                  <IconStar /><IconStar /><IconStar /><IconStar /><IconStar />
+                </div>
+                <span className="font-heading text-[#2C2418] text-sm tracking-wide">Vertraut von glücklichen Kunden</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Image Side */}
+        <div className="w-full lg:w-1/2 min-h-[50vh] lg:h-screen relative order-1 lg:order-2">
+          <div className="absolute inset-0 bg-[#2C2418]/5 z-10 pointer-events-none" />
+          <img
+            src="https://lh3.googleusercontent.com/d/1XMY7dLbaOdqbdUDZNbGj1pYxJGgDwjSV"
+            alt="Moderne Architektur in Osnabrück"
+            className="hero-image w-full h-full object-cover object-center hero-fade-in" style={{animationDelay: '0.2s'}}
+          />
+        </div>
+
+      </section>
+    );
+  };
+
+  const Features = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+      let ctx = gsap.context(() => {
+        gsap.from('.feature-item', {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+          },
+          x: -30,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      }, sectionRef);
+      return () => ctx.revert();
+    }, []);
+
+    const features = [
+      { icon: <IconMapPin />, title: "Lokale Marktkenntnis", desc: "Tiefgreifendes Wissen über Osnabrück." },
+      { icon: <IconChart />, title: "Präzise Bewertung", desc: "Datengestützte Wertermittlung." },
+      { icon: <IconKey />, title: "Diskrete Vermittlung", desc: "Vertrauensvolle Abwicklung." }
+    ];
+
+    return (
+      <section ref={sectionRef} className="bg-[#F0EDE6] py-12 border-y border-[rgba(44,36,24,0.05)]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-8 divide-y md:divide-y-0 md:divide-x divide-[rgba(44,36,24,0.1)]">
+          {features.map((f, i) => (
+            <div key={i} className="feature-item flex items-center gap-4 w-full md:w-1/3 pt-6 md:pt-0 first:pt-0 md:px-8 first:pl-0 last:pr-0">
+              <div className="text-[#B87333] shrink-0 p-3 bg-white rounded-sm shadow-sm">
+                {f.icon}
+              </div>
+              <div>
+                <h3 className="font-heading text-lg text-[#2C2418] mb-1">{f.title}</h3>
+                <p className="font-body text-sm text-[#6B5D4F]">{f.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  };
+
+  const Services = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+      let ctx = gsap.context(() => {
+        gsap.from('.service-card', {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+          y: 50,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 1,
+          ease: "power3.out"
+        });
+      }, sectionRef);
+      return () => ctx.revert();
+    }, []);
+
+    return (
+      <section id="leistungen" ref={sectionRef} className="py-32 bg-[#FAF7F2] relative overflow-hidden">
+        {/* WATERMARK TEXT */}
+        <div className="absolute bottom-0 right-[-5%] text-[clamp(6rem,12vw,16rem)] font-black uppercase tracking-wider text-black opacity-[0.025] pointer-events-none z-0 leading-none">
+          Leistungen
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+          <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-8">
+            <div className="max-w-2xl">
+              <h2 className="font-heading text-4xl md:text-5xl text-[#2C2418] mb-6">Unsere Expertise für Ihr Anliegen</h2>
+              <p className="font-body text-lg text-[#6B5D4F]">Maßgeschneiderte Lösungen für Käufer, Verkäufer und Investoren in der Region Osnabrück. Wir begleiten Sie mit Fachkompetenz und Leidenschaft.</p>
+            </div>
+          </div>
+
+          {/* BENTO GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            {/* Card 1: Double Wide */}
+            <div className="service-card group relative col-span-1 md:col-span-2 aspect-square md:aspect-[2/1] overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-500">
+              <img src="https://lh3.googleusercontent.com/d/1c0eTzCZUGLJlnGRF9K_Nqafs-mLw30eK" alt="Immobilienbewertung" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A150E]/90 via-[#1A150E]/40 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-8 md:p-10 w-full">
+                <div className="text-[#B87333] mb-3"><IconChart /></div>
+                <h3 className="font-heading text-3xl text-white mb-3">Immobilienbewertung</h3>
+                <p className="font-body text-[#F0EDE6] max-w-md">Präzise Wertermittlung Ihrer Immobilie durch erfahrene Gutachter. Die Basis für jeden erfolgreichen Verkauf.</p>
+              </div>
+            </div>
+
+            {/* Card 2: Normal */}
+            <div className="service-card group relative col-span-1 aspect-square overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-500">
+              <img src="https://lh3.googleusercontent.com/d/1QaV6lx3sEyGgXuIclhiIZVmoqAVirwrB" alt="Verkauf" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A150E]/90 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-8 w-full">
+                <h3 className="font-heading text-2xl text-white mb-3">Verkauf & Vermarktung</h3>
+                <p className="font-body text-sm text-[#F0EDE6]">Professionelle Vermarktung mit hochwertigen Exposés und breiter Reichweite für den besten Preis.</p>
+              </div>
+            </div>
+
+            {/* Card 3: Normal */}
+            <div className="service-card group relative col-span-1 aspect-square overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-500">
+              <img src="https://lh3.googleusercontent.com/d/1JJ_1ZDuJwSBDRdNn_6-dOe3mTomvJ6Un" alt="Kaufberatung" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A150E]/90 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-8 w-full">
+                <h3 className="font-heading text-2xl text-white mb-3">Kaufberatung</h3>
+                <p className="font-body text-sm text-[#F0EDE6]">Persönliche Begleitung bei der Suche nach Ihrer Traumimmobilie, vom ersten Gespräch bis zum Notar.</p>
+              </div>
+            </div>
+
+            {/* Card 4: Double Wide */}
+            <div className="service-card group relative col-span-1 md:col-span-2 aspect-square md:aspect-[2/1] overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-500">
+              <img src="https://lh3.googleusercontent.com/d/1LBk778aRVRXrlH0lhbEeB5BV6VIcKK75" alt="Mietverwaltung" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#1A150E]/90 via-[#1A150E]/60 to-transparent" />
+              <div className="absolute bottom-0 md:top-0 left-0 p-8 md:p-10 w-full md:w-2/3 flex flex-col justify-end md:justify-center">
+                <div className="text-[#B87333] mb-3"><IconKey /></div>
+                <h3 className="font-heading text-3xl text-white mb-3">Mietverwaltung</h3>
+                <p className="font-body text-[#F0EDE6]">Zuverlässige Verwaltung Ihrer Mietobjekte und Mieterbetreuung. Lehnen Sie sich zurück, wir kümmern uns um den Rest.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    );
+  };
+
+  const Philosophy = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+      let ctx = gsap.context(() => {
+        gsap.from('.philo-text', {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+          y: 20,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power2.out"
+        });
+      }, sectionRef);
+      return () => ctx.revert();
+    }, []);
+
+    return (
+      <section ref={sectionRef} className="py-20 bg-[#2C2418] text-center px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="philo-text font-heading text-2xl md:text-4xl text-[#FAF7F2] leading-tight">
+            Wir vermitteln nicht nur Immobilien, <br className="hidden md:block"/> wir finden Ihr <span className="font-drama text-[#B87333] lowercase pr-1">Zuhause</span>.
+          </p>
+        </div>
+      </section>
+    );
+  };
+
+  const Process = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+      let ctx = gsap.context(() => {
+        gsap.from('.process-step', {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 70%",
+          },
+          x: (i) => i % 2 === 0 ? -50 : 50,
+          opacity: 0,
+          stagger: 0.2,
+          duration: 1,
+          ease: "power3.out"
+        });
+      }, sectionRef);
+      return () => ctx.revert();
+    }, []);
+
+    const steps = [
+      { num: "01", title: "Erstgespräch & Analyse", desc: "Wir lernen Sie und Ihre Immobilie kennen. Eine fundierte Marktanalyse bildet die Basis für den optimalen Preis." },
+      { num: "02", title: "Vermarktungsstrategie", desc: "Erstellung eines professionellen Exposés mit hochwertigen Fotos und Platzierung auf allen relevanten Kanälen." },
+      { num: "03", title: "Besichtigung & Prüfung", desc: "Wir führen diskrete Besichtigungen durch und prüfen die Bonität potenzieller Käufer im Vorfeld." },
+      { num: "04", title: "Abschluss & Übergabe", desc: "Begleitung zum Notartermin und professionelle Schlüsselübergabe. Wir sind bis zum Schluss an Ihrer Seite." }
+    ];
+
+    return (
+      <section id="prozess" ref={sectionRef} className="py-32 bg-gradient-to-b from-[#F0EDE6] to-[#FAF7F2] relative overflow-hidden">
+        {/* WATERMARK TEXT */}
+        <div className="absolute top-1/2 -translate-y-1/2 left-[-2%] text-[clamp(6rem,12vw,16rem)] font-black uppercase tracking-wider text-black opacity-[0.025] pointer-events-none z-0 transform -rotate-90 origin-left">
+          Ablauf
+        </div>
+
+        <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10">
+          <div className="text-center mb-20">
+            <h2 className="font-heading text-4xl md:text-5xl text-[#2C2418] mb-6">Ihr Weg zum Ziel</h2>
+            <p className="font-body text-lg text-[#6B5D4F] max-w-2xl mx-auto">Ein transparenter und strukturierter Prozess garantiert Ihnen Sicherheit und den bestmöglichen Erfolg bei Ihrem Immobilienvorhaben.</p>
+          </div>
+
+          <div className="space-y-6 relative before:absolute before:inset-0 before:ml-8 md:before:ml-1/2 before:-translate-x-px md:before:mx-auto before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#B87333]/0 before:via-[#B87333]/30 before:to-[#B87333]/0">
+            
+            {steps.map((step, i) => (
+              <div key={i} className={`process-step relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group ${i !== steps.length - 1 ? 'pb-10' : ''}`}>
+                
+                {/* Connector Dot */}
+                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#FAF7F2] border-2 border-[#B87333] shadow-[0_0_0_4px_#FAF7F2] z-10 group-hover:bg-[#B87333] transition-colors duration-300" />
+
+                {/* Card */}
+                <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] ml-16 md:ml-0 bg-white p-8 shadow-sm border border-[rgba(44,36,24,0.05)] relative hover:shadow-md transition-shadow">
+                  <div className="text-[#B87333]/20 font-heading text-6xl absolute top-4 right-4 pointer-events-none select-none">{step.num}</div>
+                  <h3 className="font-heading text-2xl text-[#2C2418] mb-3 relative z-10">{step.title}</h3>
+                  <p className="font-body text-[#6B5D4F] relative z-10">{step.desc}</p>
+                </div>
+
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-20 text-center">
+             <button className="inline-flex items-center justify-center px-10 py-4 bg-[#B87333] text-white font-body text-sm uppercase tracking-widest font-semibold hover:bg-[#9A5E26] transition-colors shadow-lg shadow-[#B87333]/20">
+              Jetzt Erstgespräch vereinbaren
+            </button>
+          </div>
+        </div>
+      </section>
+    );
+  };
+
+  const Testimonials = () => {
+    const sectionRef = useRef(null);
+
+    useEffect(() => {
+      let ctx = gsap.context(() => {
+        gsap.from('.testi-card', {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+          scale: 0.9,
+          y: 40,
+          opacity: 0,
+          stagger: 0.15,
+          duration: 0.8,
+          ease: "back.out(1.5)"
+        });
+      }, sectionRef);
+      return () => ctx.revert();
+    }, []);
+
+    const reviews = [
+      { name: "Thomas Berger", role: "Verkäufer", text: "Dank der professionellen Vermarktung wurde mein Haus innerhalb von 4 Wochen verkauft — über dem Angebotspreis.", featured: false },
+      { name: "Sandra Meier", role: "Käuferin", text: "Die persönliche Beratung war hervorragend. Wir haben unsere absolute Traumwohnung in Osnabrück gefunden und fühlten uns jederzeit bestens betreut.", featured: true },
+      { name: "Klaus Hoffmann", role: "Investor", text: "Seit Jahren mein vertrauensvoller Partner für Immobilieninvestments. Absolute Empfehlung für jeden in der Region.", featured: false }
+    ];
+
+    return (
+      <section ref={sectionRef} className="py-32 bg-[#EFEADD] relative overflow-hidden">
+        {/* WATERMARK TEXT */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[clamp(5rem,10vw,14rem)] font-black uppercase tracking-wider text-black opacity-[0.025] pointer-events-none z-0 whitespace-nowrap">
+          Vertrauen
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="font-heading text-4xl md:text-5xl text-[#2C2418] mb-4">Das sagen unsere Kunden</h2>
+            <p className="font-body text-[#6B5D4F]">Erfolgreiche Vermittlungen und zufriedene Gesichter.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            {reviews.map((r, i) => (
+              <div key={i} className={`testi-card bg-white p-8 md:p-10 shadow-sm border border-[rgba(44,36,24,0.03)] flex flex-col justify-between ${r.featured ? 'md:py-14 shadow-md z-10 relative' : ''}`}>
+                <div>
+                  <div className="flex text-[#B87333] w-4 h-4 mb-6">
+                    <IconStar /><IconStar /><IconStar /><IconStar /><IconStar />
+                  </div>
+                  <p className="font-body text-lg text-[#2C2418] italic mb-8">"{r.text}"</p>
+                </div>
+                <div className="flex items-center gap-4 mt-auto">
+                  <div className="w-12 h-12 rounded-full bg-[#F0EDE6] flex items-center justify-center text-[#B87333] font-heading text-xl">
+                    {r.name.split(' ').map(n=>n[0]).join('')}
+                  </div>
+                  <div>
+                    <div className="font-heading text-[#2C2418]">{r.name}</div>
+                    <div className="font-body text-xs text-[#6B5D4F] uppercase tracking-wider">{r.role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  };
+
+  const FAQ = () => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const sectionRef = useRef(null);
+
+    const faqs = [
+      { q: "Wie läuft der Verkaufsprozess ab?", a: "Nach der kostenlosen Erstberatung erstellen wir eine Marktanalyse, professionelle Fotos und ein Exposé. Dann vermarkten wir Ihre Immobilie über alle relevanten Kanäle." },
+      { q: "Was kostet eine Immobilienbewertung?", a: "Die erste Einschätzung ist bei uns kostenlos. Ein detailliertes Wertgutachten erstellen wir auf Anfrage zu fairen Konditionen." },
+      { q: "Wie lange dauert ein Immobilienverkauf?", a: "Im Durchschnitt vermitteln wir Objekte innerhalb von 6-12 Wochen. Das hängt von Lage, Zustand und Marktlage ab." },
+      { q: "Welche Unterlagen benötige ich für den Verkauf?", a: "Grundbuchauszug, Energieausweis, Grundrisse, Wohnflächenberechnung und Baupläne. Wir helfen Ihnen gerne bei der Beschaffung." },
+      { q: "Bieten Sie auch Mietverwaltung an?", a: "Ja, wir übernehmen die komplette Verwaltung Ihrer Mietobjekte — von der Mietersuche bis zur Nebenkostenabrechnung." }
+    ];
+
+    useEffect(() => {
+      let ctx = gsap.context(() => {
+        gsap.from('.faq-content', {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+          y: 30,
+          opacity: 0,
+          duration: 1
+        });
+      }, sectionRef);
+      return () => ctx.revert();
+    }, []);
+
+    return (
+      <section id="faq" ref={sectionRef} className="py-32 bg-[#FAF7F2]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-16 faq-content">
+          
+          {/* Left: Sticky Header */}
+          <div className="lg:w-[35%] shrink-0 lg:sticky lg:top-32 self-start">
+            <h2 className="font-heading text-4xl md:text-5xl text-[#2C2418] mb-6">Häufige Fragen</h2>
+            <p className="font-body text-lg text-[#6B5D4F] mb-8">Alles was Sie wissen müssen, transparent beantwortet. Haben Sie weitere Fragen? Kontaktieren Sie uns gerne.</p>
+            <div className="hidden lg:block w-16 h-px bg-[#B87333]" />
+          </div>
+
+          {/* Right: Accordion */}
+          <div className="lg:flex-1">
+            {faqs.map((faq, i) => {
+              const isOpen = activeIndex === i;
+              return (
+                <div key={i} className="border-b border-[rgba(44,36,24,0.1)] last:border-0">
+                  <button 
+                    onClick={() => setActiveIndex(isOpen ? null : i)}
+                    className="w-full text-left py-6 md:py-8 flex justify-between items-center group"
+                  >
+                    <span className={`font-heading text-xl md:text-2xl transition-colors duration-300 pr-8 ${isOpen ? 'text-[#B87333]' : 'text-[#2C2418] group-hover:text-[#B87333]'}`}>
+                      {faq.q}
+                    </span>
+                    <span className={`text-[#2C2418] transition-transform duration-500 shrink-0 ${isOpen ? 'rotate-180 text-[#B87333]' : ''}`}>
+                      {isOpen ? <IconMinus /> : <IconPlus />}
+                    </span>
+                  </button>
+                  <div 
+                    className="grid transition-all duration-500 ease-in-out"
+                    style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
+                  >
+                    <div className="overflow-hidden">
+                      <p className="font-body text-[#6B5D4F] pb-8 pr-4 md:pr-12 text-lg leading-relaxed">
+                        {faq.a}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+
+        </div>
+      </section>
+    );
+  };
+
+  const CTA = () => {
+    return (
+      <section className="py-32 bg-white relative overflow-hidden border-t border-[rgba(44,36,24,0.05)]">
+        {/* Accent Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#B87333] rounded-full blur-[120px] opacity-10 pointer-events-none" />
+        
+        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+          <h2 className="font-heading text-5xl md:text-6xl text-[#2C2418] mb-8 leading-tight">
+            Bereit für den nächsten Schritt?
+          </h2>
+          <p className="font-body text-xl text-[#6B5D4F] mb-12 max-w-2xl mx-auto">
+            Lassen Sie uns gemeinsam herausfinden, wie wir Sie bei Ihrem Immobilienvorhaben in Osnabrück optimal unterstützen können.
+          </p>
+          <button className="inline-flex items-center justify-center px-12 py-5 bg-[#B87333] text-white font-body text-base uppercase tracking-widest font-semibold hover:bg-[#9A5E26] transition-all hover:scale-105 shadow-xl shadow-[#B87333]/20">
+            Jetzt unverbindlich anfragen
+          </button>
+          
+          <div className="mt-12 flex flex-wrap justify-center gap-6">
+            <div className="flex items-center gap-2 bg-[#FAF7F2] px-4 py-2 rounded-full text-sm font-body text-[#6B5D4F] border border-[rgba(44,36,24,0.05)]">
+              <span className="text-green-600"><IconCheck /></span> Kostenlose Erstberatung
+            </div>
+            <div className="flex items-center gap-2 bg-[#FAF7F2] px-4 py-2 rounded-full text-sm font-body text-[#6B5D4F] border border-[rgba(44,36,24,0.05)]">
+              <span className="text-green-600"><IconCheck /></span> Unverbindliche Wertermittlung
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  };
+
+  const Footer = () => {
+    return (
+      <footer className="bg-[#1A150E] pt-24 pb-12 px-6 md:px-12 border-t border-[#B87333]/20">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
+          
+          {/* Col 1 */}
+          <div>
+            <div className="font-heading text-3xl tracking-wide text-[#FAF7F2] mb-6">
+              Im-immobilien<span className="text-[#B87333]">.</span>
+            </div>
+            <p className="font-body text-[#A3988A] max-w-sm">
+              Ihr zuverlässiger Partner für Immobilien in Osnabrück. Wir bringen Menschen und Räume zusammen.
+            </p>
+          </div>
+
+          {/* Col 2 */}
+          <div>
+            <h4 className="font-body text-sm uppercase tracking-widest text-[#FAF7F2] font-semibold mb-6">Kontakt</h4>
+            <ul className="space-y-4 font-body text-[#A3988A]">
+              <li>Musterstraße 123<br/>49074 Osnabrück</li>
+              <li><a href="tel:+49541123456" className="hover:text-[#B87333] transition-colors">+49 (0) 541 123 456</a></li>
+              <li><a href="mailto:info@im-immobilien-os.de" className="hover:text-[#B87333] transition-colors">info@im-immobilien-os.de</a></li>
+            </ul>
+          </div>
+
+          {/* Col 3 */}
+          <div>
+            <h4 className="font-body text-sm uppercase tracking-widest text-[#FAF7F2] font-semibold mb-6">Rechtliches</h4>
+            <ul className="space-y-4 font-body text-[#A3988A]">
+              <li><a href="#" className="hover:text-[#FAF7F2] transition-colors">Impressum</a></li>
+              <li><a href="#" className="hover:text-[#FAF7F2] transition-colors">Datenschutz</a></li>
+              <li><a href="#" className="hover:text-[#FAF7F2] transition-colors">AGB</a></li>
+            </ul>
+          </div>
+
+        </div>
+        
+        <div className="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="font-body text-sm text-[#A3988A]">
+            &copy; {new Date().getFullYear()} Im-immobilien Osnabrück. Alle Rechte vorbehalten.
+          </div>
+          <div className="font-body text-sm text-[#A3988A]">
+            Design by Awwwards Winner
+          </div>
+        </div>
+      </footer>
+    );
+  };
+
+  return (
+    <div className="bg-[#FAF7F2] text-[#2C2418] font-body selection:bg-[#B87333] selection:text-white">
+      <NoiseOverlay />
+      <Navbar />
+      <main>
+        <Hero />
+        <Features />
+        <Services />
+        <Philosophy />
+        <Process />
+        <Testimonials />
+        <FAQ />
+        <CTA />
+      </main>
+      <Footer />
+    </div>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+  </script>
+  
+  <noscript>
+    <div style="text-align:center;padding:4rem;font-family:system-ui;">
+      <h1>Im-immobilien Osnabrück</h1>
+      <p>Bitte aktivieren Sie JavaScript.</p>
+      <p>Telefon: </p>
+    </div>
+  </noscript>
+</body>
+</html>
