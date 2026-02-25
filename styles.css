@@ -1,0 +1,80 @@
+:root {
+  --accent: #B87333;
+  --accent-rgb: 184, 115, 51;
+  --accent-text: #111111;
+  --bg: #FAF7F2;
+  --text: #2C2418;
+}
+
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+::selection { background: rgba(184, 115, 51, 0.2); color: #2C2418; }
+
+
+img { transition: opacity 0.4s ease; }
+
+
+/* === Gemini CSS === */
+/* Google Fonts Import (Fallback falls nicht im HTML) */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=DM+Serif+Display&family=Source+Sans+3:wght@400;600&display=swap');
+
+:root {
+  --font-heading: 'DM Serif Display', serif;
+  --font-body: 'Source Sans 3', sans-serif;
+  --font-drama: 'Cormorant Garamond', serif;
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-drama {
+  font-family: var(--font-drama);
+  font-style: italic;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #F0EDE6;
+}
+::-webkit-scrollbar-thumb {
+  background: #B87333;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9A5E26;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth Image Rendering */
+img {
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Hero fade-in animation — CSS only, no GSAP */
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-fade-in {
+  opacity: 0;
+  animation: heroFadeIn 0.8s ease-out forwards;
+}
