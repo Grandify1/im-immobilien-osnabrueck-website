@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immobilie | IM Immobilien GmbH</title>
+  <meta name="openclaw-project" content="im-immobilien-v3">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = {"theme":{"extend":{"colors":{"brand":{"DEFAULT":"#BF0101"}},"fontFamily":{"heading":["'Inter'","system-ui","sans-serif"],"body":["'Inter'","system-ui","sans-serif"],"drama":["'Playfair Display'","Georgia","serif"]}}}}</script>
+
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #F8FAFC; color: #0F172A; -webkit-font-smoothing: antialiased; }
+    .fade-in { animation: fadeIn 0.6s ease both; }
+    .fade-in-up { animation: fadeInUp 0.7s ease both; }
+    .fade-in-up-delay-1 { animation-delay: 0.1s; }
+    .fade-in-up-delay-2 { animation-delay: 0.2s; }
+    .fade-in-up-delay-3 { animation-delay: 0.3s; }
+    .fade-in-up-delay-4 { animation-delay: 0.4s; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .detail-card { background: #fff; border: 1px solid rgba(0,0,0,0.06); border-radius: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .badge-sold { background: linear-gradient(135deg, #BF0101, #8B0000); }
+    .bottom-bar { box-shadow: 0 -4px 30px rgba(0,0,0,0.08); }
+    @media (max-width: 768px) {
+      .hero-img { height: 300px !important; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // ============================================================
+    // CMS DATA — Hier werden alle Objekte gepflegt
+    // Später durch API/CMS-Endpoint ersetzbar
+    // ============================================================
+    const OBJEKTE = [
+      {
+        id: 1,
+        status: "verfügbar",
+        title: "Wohn- u. Gastronomiegebäude",
+        slug: "wohn-gastronomie-herford",
+        location: "Herford - Friedenstal",
+        price: "415.000",
+        rooms: 14,
+        area: 292,
+        plotSize: 1480,
+        floors: 3,
+        yearBuilt: 1965,
+        yearRenovated: 2018,
+        type: "Mischgebiet",
+        energyClass: "D",
+        heatingType: "Gas-Zentralheizung",
+        parking: "4 Stellplätze",
+        img: "./assets/bild-wohnung.png",
+        images: ["./assets/bild-wohnung.png"],
+        beschreibung: "Einzigartiges Wohn- und Gewerbegebäude in zentraler Lage von Herford-Friedenstal. Das Erdgeschoss bietet vollständig ausgestattete Gastronomieräume mit professioneller Küche, während die Obergeschosse großzügige Wohneinheiten beherbergen. Die Kombination aus gewerblicher Nutzung und Wohnraum macht dieses Objekt zu einer vielseitigen Kapitalanlage mit stabilen Mieteinnahmen.",
+        ausstattung: [
+          "Professionelle Gastroküche mit Edelstahl-Ausstattung",
+          "Gastraum mit Platz für 80 Gäste",
+          "3 separate Wohneinheiten im OG",
+          "Modernisierte Bäder und Sanitäranlagen",
+          "Neue Fenster mit Wärmeschutzverglasung (2018)",
+          "Fußbodenheizung in den Wohneinheiten",
+          "Kellerräume mit Kühlung",
+          "Großer Innenhof mit Terrasse"
+        ],
+        lage: "Das Objekt befindet sich in der beliebten Lage Herford-Friedenstal, nur wenige Gehminuten vom Stadtzentrum entfernt. Einkaufsmöglichkeiten, Schulen und öffentliche Verkehrsanbindung sind fußläufig erreichbar. Die A2 ist in 5 Minuten erreichbar, was die Anbindung an Bielefeld und Osnabrück sicherstellt. Die Nachbarschaft ist geprägt von einer Mischung aus Wohn- und Geschäftshäusern.",
+        hinweise: "Das Objekt wurde 2018 umfassend saniert. Die Gastronomiefläche ist aktuell verpachtet (Pachtvertrag bis 2028). Alle drei Wohneinheiten sind vermietet. Der Energieausweis liegt vor. Besichtigungen nach Vereinbarung."
+      },
+      {
+        id: 2,
+        status: "verfügbar",
+        title: "Exklusives Einfamilienhaus mit Garten",
+        slug: "efh-osnabrueck-sonnenhuegel",
+        location: "Osnabrück - Sonnenhügel",
+        price: "689.000",
+        rooms: 6,
+        area: 185,
+        plotSize: 720,
+        floors: 2,
+        yearBuilt: 2019,
+        type: "Haus",
+        energyClass: "A+",
+        heatingType: "Luft-Wärme-Pumpe",
+        parking: "Doppelgarage + 2 Stellplätze",
+        img: "./assets/bild-haus.png",
+        images: ["./assets/bild-haus.png"],
+        beschreibung: "Dieses architektonisch anspruchsvolle Einfamilienhaus überzeugt durch seine durchdachte Raumaufteilung und hochwertige Ausstattung. Große Fensterflächen fluten die Räume mit natürlichem Licht, während der südwestlich ausgerichtete Garten zum Verweilen einlädt. Das Haus wurde 2019 in KfW-55-Standard errichtet und bietet modernsten Wohnkomfort auf höchstem Niveau.",
+        ausstattung: [
+          "Offene Wohnküche mit Kochinsel (Bulthaup)",
+          "Echtholzparkett in allen Wohnräumen",
+          "Fußbodenheizung im gesamten Haus",
+          "Smart-Home-System (KNX)",
+          "Elektrische Rolläden mit Zeitsteuerung",
+          "Master-Schlafzimmer mit Ankleide und En-Suite-Bad",
+          "Gäste-WC und separates Duschbad",
+          "Südwest-Terrasse mit elektrischer Markise",
+          "Doppelgarage mit Wallbox für E-Auto"
+        ],
+        lage: "Osnabrück-Sonnenhügel gehört zu den begehrtesten Wohnlagen der Stadt. Die ruhige, familiäre Nachbarschaft besticht durch gepflegte Vorgärten und gewachsene Baumbestände. Das Stadtzentrum erreichen Sie in 10 Minuten mit dem Fahrrad. Internationale Schulen, der Bürgerpark und zahlreiche Freizeitangebote befinden sich in unmittelbarer Nähe.",
+        hinweise: "Energieeffizienzhaus KfW-55. Übergabe erfolgte möbliert nach Vereinbarung. Das Grundstück ist voll erschlossen. Nachbarschaftliche Bauvorschriften sichern den Charakter der Wohngegend langfristig."
+      },
+      {
+        id: 3,
+        status: "verfügbar",
+        title: "Moderne 3-Zimmer-Eigentumswohnung",
+        slug: "etw-osnabrueck-wueste",
+        location: "Osnabrück - Wüste",
+        price: "345.000",
+        rooms: 3,
+        area: 82,
+        plotSize: null,
+        floors: null,
+        floor: 2,
+        totalFloors: 4,
+        yearBuilt: 2021,
+        type: "Wohnung",
+        energyClass: "A",
+        heatingType: "Fernwärme",
+        parking: "Tiefgaragenstellplatz",
+        img: "./assets/bild-penthouse.png",
+        images: ["./assets/bild-penthouse.png"],
+        beschreibung: "Stilvolle Eigentumswohnung in einem modernen Neubau aus 2021 im beliebten Viertel Osnabrück-Wüste. Die Wohnung besticht durch ihren offenen Grundriss mit bodentiefer Verglasung und einem großzügigen Südbalkon mit Blick ins Grüne. Hochwertige Materialien und durchdachte Details schaffen ein Wohngefühl auf gehobenem Niveau.",
+        ausstattung: [
+          "Offener Wohn-/Essbereich mit Designküche",
+          "Bodentiefe Fenster mit 3-fach Verglasung",
+          "Großer Südbalkon (12 m²)",
+          "Hochwertige Fliesen und Eichenparkett",
+          "Fußbodenheizung",
+          "Badezimmer mit ebenerdiger Regendusche und Badewanne",
+          "Gäste-WC",
+          "Abstellraum und Kellerabteil",
+          "Tiefgaragenstellplatz mit Wallbox-Vorbereitung",
+          "Aufzug im Haus"
+        ],
+        lage: "Die Wüste ist eines der lebendigsten Viertel Osnabrücks — urban, grün und bestens angebunden. Cafés, Restaurants und kleine Boutiquen prägen das Straßenbild. Der Wochenmarkt am Ledenhof ist fußläufig erreichbar. Die Innenstadt erreichen Sie in 5 Minuten zu Fuß, den Hauptbahnhof in 10 Minuten. Ideal für alle, die urbanes Leben mit Lebensqualität verbinden möchten.",
+        hinweise: "Die Wohnung wird provisionsfrei für den Käufer angeboten. Hausgeld inkl. Rücklagen: 320 EUR/Monat. Die Tiefgarage ist beheizbar. Gemeinschaftlicher Fahrradkeller vorhanden. Besichtigungstermine nach Vereinbarung."
+      },
+      {
+        id: 4,
+        status: "verfügbar",
+        title: "Kapitalanlage: Mehrfamilienhaus",
+        slug: "mfh-bad-essen-zentrum",
+        location: "Bad Essen - Zentrum",
+        price: "520.000",
+        rooms: 12,
+        area: 340,
+        plotSize: 890,
+        floors: 3,
+        yearBuilt: 1992,
+        yearRenovated: 2020,
+        type: "Mehrfamilienhaus",
+        energyClass: "C",
+        heatingType: "Gas-Zentralheizung",
+        parking: "6 Stellplätze",
+        img: "./assets/img-kapitalanlage.png",
+        images: ["./assets/img-kapitalanlage.png"],
+        beschreibung: "Solides Mehrfamilienhaus mit vier separat vermieteten Wohneinheiten in zentraler Lage von Bad Essen. Das Objekt wurde 2020 umfassend modernisiert — neue Heizungsanlage, gedämmte Fassade, erneuerte Elektrik. Alle Einheiten sind aktuell vermietet und erwirtschaften stabile Mieteinnahmen. Eine attraktive Kapitalanlage mit Entwicklungspotenzial in einer der gefragtesten Lagen des Osnabrücker Landes.",
+        ausstattung: [
+          "4 separate Wohneinheiten (2x 3-Zimmer, 1x 2-Zimmer, 1x 4-Zimmer)",
+          "Vollständig modernisierte Heizungsanlage (2020)",
+          "Wärmegedämmte Fassade (WDVS)",
+          "Neue Elektroinstallation in allen Einheiten",
+          "Kunststofffenster mit Doppelverglasung",
+          "Gepflegtes Treppenhaus mit Granitboden",
+          "Kellerräume für jede Wohneinheit",
+          "Großer Gemeinschaftsgarten",
+          "6 PKW-Stellplätze im Hof"
+        ],
+        lage: "Das Mehrfamilienhaus liegt im Herzen von Bad Essen, nur wenige Gehminuten vom Marktplatz und allen wichtigen Einrichtungen entfernt. Supermärkte, Ärzte, Apotheken und Schulen befinden sich in unmittelbarer Nähe. Die Anbindung an die B65 und die A1 ermöglicht schnelle Erreichbarkeit von Osnabrück (25 Min.) und Minden (20 Min.). Bad Essen ist bekannt für seinen hohen Freizeitwert mit dem Wiehengebirge direkt vor der Tür.",
+        hinweise: "Alle vier Wohneinheiten sind vermietet. Jahresnettokaltmiete: 38.400 EUR (Rendite ca. 7,4%). Die Modernisierungsmaßnahmen von 2020 sind vollständig abgeschlossen. Energieausweis und Mietverträge liegen zur Einsicht bereit. Besichtigungen nach Vereinbarung."
+      },
+      {
+        id: 5,
+        status: "reserviert",
+        title: "Gewerbehalle mit Bürotrakt",
+        slug: "gewerbe-melle-industrie",
+        location: "Melle - Industriegebiet",
+        price: "395.000",
+        rooms: 8,
+        area: 620,
+        plotSize: 2400,
+        floors: 2,
+        yearBuilt: 2005,
+        type: "Gewerbe",
+        energyClass: "E",
+        heatingType: "Gas-Zentralheizung",
+        parking: "12 Stellplätze + LKW-Zufahrt",
+        img: "./assets/img-gewerbe.png",
+        images: ["./assets/img-gewerbe.png"],
+        beschreibung: "Moderne Gewerbehalle mit angeschlossenem Bürotrakt in bester Lage im Industriegebiet Melle-West. Die lichtdurchflutete Halle bietet 420 m² Nutzfläche mit 6 Metern Deckenhöhe, einem Rolltor für LKW-Anlieferung und Starkstromanschluss. Der zweigeschossige Bürotrakt umfasst 200 m² mit Empfangsbereich, Besprechungsraum, 4 Einzelbüros und Sanitäranlage. Ideal für Handwerk, Produktion oder Logistik.",
+        ausstattung: [
+          "420 m² Hallenfläche mit 6 m Deckenhöhe",
+          "200 m² Bürofläche auf 2 Etagen",
+          "Großes Rolltor (4 x 4 m) für LKW-Zufahrt",
+          "Starkstromanschluss (400V/63A)",
+          "Druckluftanlage installiert",
+          "Fußbodenheizung im Bürotrakt",
+          "Moderne Sanitäranlagen inkl. Dusche",
+          "Vollständig eingezäuntes Grundstück",
+          "12 PKW-Stellplätze, asphaliert",
+          "Glasfaser-Internetanschluss"
+        ],
+        lage: "Das Objekt befindet sich im etablierten Industriegebiet Melle-West mit direkter Anbindung an die A30 (Auffahrt 2 Min.). Die Nachbarschaft besteht aus Handwerksbetrieben, Logistikunternehmen und produzierendem Gewerbe. Melle bietet als Mittelzentrum alle wichtigen Infrastruktureinrichtungen. Osnabrück ist in 20 Minuten erreichbar, Bielefeld in 35 Minuten.",
+        hinweise: "Das Objekt ist aktuell reserviert. Vormerkungen für den Fall einer Nichtzustandekommen des Verkaufs sind möglich. Die Halle ist sofort bezugsfähig. Grundbuch lastenfrei. Energieausweis liegt vor. Bei Interesse sprechen Sie uns gerne an."
+      },
+      {
+        id: 6,
+        status: "verfügbar",
+        title: "Penthouse mit Dachterrasse",
+        slug: "penthouse-osnabrueck-innenstadt",
+        location: "Osnabrück - Innenstadt",
+        price: "785.000",
+        rooms: 4,
+        area: 142,
+        plotSize: null,
+        floors: null,
+        floor: 5,
+        totalFloors: 5,
+        yearBuilt: 2023,
+        type: "Wohnung",
+        energyClass: "A",
+        heatingType: "Fernwärme + Klimaanlage",
+        parking: "2 Tiefgaragenstellplätze",
+        img: "./assets/bild-penthouse.png",
+        images: ["./assets/bild-penthouse.png"],
+        beschreibung: "Exklusives Penthouse über den Dächern der Osnabrücker Altstadt. Diese einzigartige Wohnung im obersten Geschoss eines 2023 fertiggestellten Neubaus bietet 142 m² puren Luxus mit einer 60 m² großen Dachterrasse und atemberaubendem 360°-Panorama. Bodentiefe Verglasung auf drei Seiten, offener Wohn-/Koch-/Essbereich und ein Master-Schlafzimmer mit begehbarer Ankleide und En-Suite-Bad. Concierge-Service und Tiefgarage inklusive.",
+        ausstattung: [
+          "60 m² Dachterrasse mit Outdoor-Küche und Lounge-Bereich",
+          "Bodentiefe Panoramaverglasung auf 3 Seiten",
+          "Offener Wohn-/Koch-/Essbereich (65 m²)",
+          "Designerküche von Bulthaup mit Kochinsel",
+          "Master-Schlafzimmer mit Ankleide und En-Suite-Bad",
+          "Regendusche und freistehende Badewanne",
+          "Eichenparkett durchgängig, Fußbodenheizung",
+          "Smart-Home-System (Loxone) inkl. Licht, Jalousien, Klima",
+          "Klimaanlage in allen Räumen",
+          "2 Tiefgaragenstellplätze mit Wallbox",
+          "Concierge-Service und Paketannahme",
+          "Aufzug direkt in die Wohnung"
+        ],
+        lage: "Mitten in der historischen Altstadt von Osnabrück — und doch über allem. Vom Penthouse aus blicken Sie auf den Dom, das Rathaus des Westfälischen Friedens und die grünen Hügel des Teutoburger Waldes. Restaurants, Theater, Boutiquen und der Wochenmarkt befinden sich direkt vor der Haustür. Der Hauptbahnhof ist in 8 Minuten zu Fuß erreichbar. Diese Lage ist einmalig in Osnabrück.",
+        hinweise: "Erstbezug, die Wohnung wurde noch nie bewohnt. Übergabe sofort möglich. Hausgeld inkl. Rücklagen und Concierge: 680 EUR/Monat. Die Wohnung kann auf Wunsch mit ausgewähltem Designermobiliar übergeben werden (Aufpreis nach Vereinbarung). Besichtigungen ausschließlich nach Terminvereinbarung."
+      }
+    ];
+
+    // ============================================================
+    // COMPONENTS
+    // ============================================================
+
+    const BackButton = () => (
+      <a href="angebote.html" className="inline-flex items-center gap-2 text-slate-500 hover:text-brand transition-colors text-sm font-medium group">
+        <svg className="w-4 h-4 transition-transform group-hover:-translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        Zurück zur Übersicht
+      </a>
+    );
+
+    const StatusBadge = ({ status }) => {
+      if (status === "verkauft") return (
+        <span className="badge-sold text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Verkauft</span>
+      );
+      if (status === "reserviert") return (
+        <span className="bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Reserviert</span>
+      );
+      return (
+        <span className="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Verfügbar</span>
+      );
+    };
+
+    const DetailItem = ({ icon, label, value }) => {
+      if (!value) return null;
+      return (
+        <div className="flex flex-col items-center text-center p-4">
+          <div className="text-slate-400 mb-2">{icon}</div>
+          <div className="text-lg md:text-xl font-bold text-slate-900">{value}</div>
+          <div className="text-xs text-slate-500 mt-1 font-medium">{label}</div>
+        </div>
+      );
+    };
+
+    const SectionTitle = ({ children }) => (
+      <h2 className="text-xl md:text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+        <span className="w-1 h-7 bg-brand rounded-full"></span>
+        {children}
+      </h2>
+    );
+
+    const ObjektDetail = ({ objekt }) => {
+      const o = objekt;
+
+      const details = [
+        { icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>, label: "Zimmer", value: o.rooms ? `${o.rooms}` : null },
+        { icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 12h18M3 12v6a2 2 0 002 2h14a2 2 0 002-2v-6M5 12V7a2 2 0 012-2h10a2 2 0 012 2v5"/></svg>, label: "Wohnfläche", value: o.area ? `${o.area} m²` : null },
+        { icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M3 21V3h18v18H3z"/><path d="M9 21V13h6v8"/></svg>, label: "Grundstück", value: o.plotSize ? `${o.plotSize} m²` : null },
+        { icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>, label: o.floor ? "Etage" : "Geschosse", value: o.floor ? `${o.floor}. OG von ${o.totalFloors}` : (o.floors ? `${o.floors}` : null) },
+        { icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>, label: "Baujahr", value: o.yearBuilt ? `${o.yearBuilt}` : null },
+        { icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg>, label: "Energieeffizienz", value: o.energyClass ? `Klasse ${o.energyClass}` : null },
+        { icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>, label: "Objektart", value: o.type },
+        { icon: <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="1" y="6" width="22" height="12" rx="2"/><path d="M1 10h22"/></svg>, label: "Stellplatz", value: o.parking },
+      ];
+
+      return (
+        <div className="min-h-screen pb-28">
+          {/* Navbar */}
+          <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/50 transition-all">
+            <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+              <a href="index.html" className="flex items-center gap-2">
+                <div className="w-8 h-8 bg-brand text-white flex items-center justify-center rounded-lg font-bold text-sm tracking-tighter">IM</div>
+                <span className="font-bold text-lg tracking-tight text-slate-900">IM Immobilien</span>
+              </a>
+              <a href="angebote.html" className="text-sm text-slate-500 hover:text-brand transition-colors font-medium hidden sm:inline-flex items-center gap-1">
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6" /></svg>
+                Alle Objekte
+              </a>
+            </div>
+          </nav>
+
+          {/* Hero Image */}
+          <div className="fade-in relative w-full overflow-hidden bg-slate-100" style={{ height: '480px' }}>
+            <img
+              src={o.images[0]}
+              alt={o.title}
+              className="hero-img w-full h-full object-cover"
+              style={{ height: '480px' }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
+              <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <StatusBadge status={o.status} />
+                    <span className="text-white/70 text-sm font-medium">{o.type}</span>
+                  </div>
+                  <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">{o.title}</h1>
+                  <div className="flex items-center gap-2 mt-3 text-white/80">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/>
+                    </svg>
+                    <span className="text-sm font-medium">{o.location}</span>
+                  </div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-xl rounded-2xl px-6 py-4 border border-white/20">
+                  <div className="text-white/60 text-xs font-medium uppercase tracking-wider mb-1">Kaufpreis</div>
+                  <div className="text-3xl md:text-4xl font-bold text-white">{'\u20AC'} {o.price}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="max-w-6xl mx-auto px-4 md:px-6 -mt-6 relative z-10">
+            {/* Eckdaten Grid */}
+            <div className="fade-in-up detail-card p-4 md:p-6 mb-8">
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-0 divide-x divide-slate-100">
+                {details.filter(d => d.value).slice(0, 4).map((d, i) => (
+                  <DetailItem key={i} icon={d.icon} label={d.label} value={d.value} />
+                ))}
+              </div>
+              {details.filter(d => d.value).length > 4 && (
+                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-0 divide-x divide-slate-100 border-t border-slate-100 mt-2 pt-2">
+                  {details.filter(d => d.value).slice(4, 8).map((d, i) => (
+                    <DetailItem key={i} icon={d.icon} label={d.label} value={d.value} />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Main Content */}
+              <div className="lg:col-span-2 space-y-8">
+                {/* Beschreibung */}
+                <div className="fade-in-up fade-in-up-delay-1 detail-card p-6 md:p-8">
+                  <SectionTitle>Objektbeschreibung</SectionTitle>
+                  <p className="text-slate-600 leading-relaxed text-base">{o.beschreibung}</p>
+                </div>
+
+                {/* Ausstattung */}
+                <div className="fade-in-up fade-in-up-delay-2 detail-card p-6 md:p-8">
+                  <SectionTitle>Ausstattung</SectionTitle>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {o.ausstattung.map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-slate-600">
+                        <svg className="w-5 h-5 text-brand shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                        <span className="text-sm leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Lage */}
+                <div className="fade-in-up fade-in-up-delay-3 detail-card p-6 md:p-8">
+                  <SectionTitle>Lage</SectionTitle>
+                  <p className="text-slate-600 leading-relaxed text-base">{o.lage}</p>
+                </div>
+
+                {/* Sonstige Hinweise */}
+                {o.hinweise && (
+                  <div className="fade-in-up fade-in-up-delay-4 detail-card p-6 md:p-8">
+                    <SectionTitle>Sonstige Hinweise</SectionTitle>
+                    <p className="text-slate-600 leading-relaxed text-base">{o.hinweise}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-6">
+                {/* Ansprechpartner */}
+                <div className="fade-in-up fade-in-up-delay-2 detail-card p-6">
+                  <h3 className="font-bold text-slate-900 mb-4 text-lg">Ihr Ansprechpartner</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-brand font-bold text-lg">IC</div>
+                      <div>
+                        <div className="font-bold text-slate-900">Ingo Christoffer</div>
+                        <div className="text-sm text-slate-500">Geschäftsführer</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-brand font-bold text-lg">MB</div>
+                      <div>
+                        <div className="font-bold text-slate-900">Martin Berkenkamp</div>
+                        <div className="text-sm text-slate-500">Geschäftsführer</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-slate-100 space-y-3">
+                    <a href="tel:01764350716" className="flex items-center gap-3 text-slate-600 hover:text-brand transition-colors text-sm">
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c1.21.34 2 .57 2.81.7A2 2 0 0 1 22 16.92z"/>
+                      </svg>
+                      0176 43 507 169
+                    </a>
+                    <a href="tel:01757466174" className="flex items-center gap-3 text-slate-600 hover:text-brand transition-colors text-sm">
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c1.21.34 2 .57 2.81.7A2 2 0 0 1 22 16.92z"/>
+                      </svg>
+                      0175 74 661 74
+                    </a>
+                    <a href="mailto:info@im-immobilien.eu" className="flex items-center gap-3 text-slate-600 hover:text-brand transition-colors text-sm">
+                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                      </svg>
+                      info@im-immobilien.eu
+                    </a>
+                  </div>
+                </div>
+
+                {/* Energieausweis */}
+                <div className="fade-in-up fade-in-up-delay-3 detail-card p-6">
+                  <h3 className="font-bold text-slate-900 mb-4 text-lg">Energieausweis</h3>
+                  <div className="space-y-3 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Energieeffizienz</span>
+                      <span className="font-semibold text-slate-900">Klasse {o.energyClass}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Heizungsart</span>
+                      <span className="font-semibold text-slate-900">{o.heatingType}</span>
+                    </div>
+                    {o.yearBuilt && (
+                      <div className="flex justify-between">
+                        <span className="text-slate-500">Baujahr</span>
+                        <span className="font-semibold text-slate-900">{o.yearBuilt}</span>
+                      </div>
+                    )}
+                    {o.yearRenovated && (
+                      <div className="flex justify-between">
+                        <span className="text-slate-500">Sanierung</span>
+                        <span className="font-semibold text-slate-900">{o.yearRenovated}</span>
+                      </div>
+                    )}
+                  </div>
+                  {/* Energy bar */}
+                  <div className="mt-4 h-3 rounded-full overflow-hidden flex">
+                    {["#00873E","#4CAF50","#8BC34A","#CDDC39","#FFEB3B","#FFC107","#FF9800","#F44336"].map((c,i) => (
+                      <div key={i} className="flex-1 relative" style={{ background: c }}>
+                        {o.energyClass === ["A+","A","B","C","D","E","F","G"][i] && (
+                          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-5 h-5 bg-slate-900 rounded-full border-2 border-white shadow-md"></div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex justify-between text-xs text-slate-400 mt-1">
+                    <span>A+</span><span>G</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Fixed Bottom Bar */}
+          <div className="bottom-bar fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-xl border-t border-slate-200/50">
+            <div className="max-w-6xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between gap-4">
+              <div className="hidden sm:block">
+                <div className="text-sm text-slate-500">{o.title}</div>
+                <div className="text-xl font-bold text-slate-900">{'\u20AC'} {o.price}</div>
+              </div>
+              <div className="flex items-center gap-3 w-full sm:w-auto">
+                <a href="tel:01764350716" className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand text-white font-semibold rounded-full hover:bg-red-700 transition-all shadow-lg shadow-red-900/20 hover:shadow-red-900/30 text-sm md:text-base">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c1.21.34 2 .57 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                  Jetzt Kontakt aufnehmen
+                </a>
+                <a href="mailto:info@im-immobilien.eu" className="hidden md:inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-slate-200 text-slate-700 font-semibold rounded-full hover:border-brand hover:text-brand transition-all text-sm">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                  E-Mail schreiben
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    // ============================================================
+    // APP — URL Parameter auslesen, Objekt finden, rendern
+    // ============================================================
+    const App = () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'), 10);
+
+      const objekt = OBJEKTE.find(o => o.id === id);
+
+      if (!objekt) {
+        return (
+          <div className="min-h-screen flex items-center justify-center bg-[#F8FAFC]">
+            <div className="text-center max-w-md px-6">
+              <div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-10 h-10 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M3 12h18M3 12v6a2 2 0 002 2h14a2 2 0 002-2v-6M5 12V7a2 2 0 012-2h10a2 2 0 012 2v5"/>
+                </svg>
+              </div>
+              <h1 className="text-2xl font-bold text-slate-900 mb-3">Objekt nicht gefunden</h1>
+              <p className="text-slate-500 mb-8">Das gesuchte Objekt existiert nicht oder wurde entfernt.</p>
+              <a href="angebote.html" className="inline-flex items-center justify-center px-6 py-3 bg-brand text-white font-semibold rounded-full hover:bg-red-700 transition-colors">
+                Zur Übersicht
+              </a>
+            </div>
+          </div>
+        );
+      }
+
+      // Dynamic title
+      document.title = `${objekt.title} | IM Immobilien GmbH`;
+
+      return <ObjektDetail objekt={objekt} />;
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+
+  <noscript>
+    <div style="text-align:center;padding:4rem;font-family:system-ui;">
+      <h1>IM Immobilien GmbH</h1>
+      <p>Bitte aktivieren Sie JavaScript.</p>
+      <p>Telefon: 0176 43 507 169 | 0175 74 661 74</p>
+    </div>
+  </noscript>
+</body>
+</html>
