@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Im-immobilien Osnabrück</title>
+  <meta name="description" content="Im-immobilien Osnabrück — Immobilienmakler in Osnabrück">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#F8FAFC">
+  <meta name="openclaw-project" content="im-immobilien-osnabrueck-6qng">
+  <meta name="openclaw-version" content="5">
+  <meta name="openclaw-engine" content="react-gsap">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"brand":{"DEFAULT":"#BF0101","text":"#ffffff","light":"rgba(191, 1, 1,0.15)","glow":"rgba(191, 1, 1,0.08)"},"surface":{"DEFAULT":"#F8FAFC","alt":"#F0F2F5","card":"#ffffff"},"content":{"DEFAULT":"#0F172A","secondary":"#64748B"},"card-border":"rgba(0,0,0,0.08)"},"fontFamily":{"heading":["'Inter'","system-ui","sans-serif"],"body":["'Inter'","system-ui","sans-serif"],"drama":["'Playfair Display'","Georgia","Times New Roman","serif"]}}}}</script>
+  
+  <link rel="stylesheet" href="styles.css">
+
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="http://152.53.182.209/im-immobilien-osnabrueck-6qng/blog.html" id="canonical-url">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:site_name" content="Im-immobilien Osnabrück">
+  <meta name="geo.placename" content="Osnabrück">
+  <link rel="alternate" type="application/rss+xml" title="Blog — Im-immobilien Osnabrück" href="http://152.53.182.209/im-immobilien-osnabrueck-6qng/rss.xml">
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: var(--font-body, 'Inter', system-ui, sans-serif); }
+    #blog-app { min-height:60vh; }
+
+    /* Overview */
+    .blog-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:1.5rem; }
+    .blog-card { background:rgba(0,0,0,0.03); border:1px solid rgba(0,0,0,0.08); border-radius:1rem; padding:0; overflow:hidden; transition:all 0.3s; text-decoration:none; color:inherit; display:block; cursor:pointer; }
+    .blog-card:hover { border-color:#BF0101; transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,0.08); }
+    .blog-card-img { width:100%; height:200px; background-size:cover; background-position:center; }
+    .blog-card-body { padding:1.5rem 2rem 2rem; }
+    .blog-card h3 { font-size:1.2rem; font-weight:700; margin-bottom:0.75rem; font-family:var(--font-heading, 'Inter', system-ui, sans-serif); line-height:1.3; }
+    .blog-card p { color:rgba(0,0,0,0.5); line-height:1.7; font-size:0.9rem; }
+    .blog-tag { display:inline-block; font-size:0.75rem; font-weight:600; padding:0.25rem 0.75rem; border-radius:2rem; background:#BF010120; color:#BF0101; margin-bottom:1rem; }
+    .blog-meta { font-size:0.8rem; color:rgba(0,0,0,0.5); margin-top:1rem; }
+
+    /* Post Hero Header */
+    .post-hero {
+      position: relative;
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(160deg, #f8f9fa 0%, #BF010112 40%, #BF010108 100%);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .post-hero.has-hero-img {
+      background-size: cover;
+      background-position: center;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 3rem;
+    }
+    .post-hero.has-hero-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, #F8FAFC40 0%, #F8FAFCcc 60%, #F8FAFCf0 100%);
+      z-index: 0;
+    }
+    .post-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 60%;
+      height: 200%;
+      background: radial-gradient(ellipse, #BF010110 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .post-hero.has-hero-img::before { display: none; }
+    .post-hero * { position: relative; z-index: 1; }
+    .post-hero h1 {
+      font-family: var(--font-heading, 'Inter', system-ui, sans-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .post-hero.has-hero-img h1 { color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+    .post-hero.has-hero-img .blog-tag { background: #BF0101; color: #fff; }
+    .post-hero.has-hero-img .blog-meta-hero { color: rgba(255,255,255,0.8); }
+
+    /* Detail */
+    .post-back { display:inline-flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:#BF0101; text-decoration:none; margin-bottom:1.5rem; transition:color 0.2s; cursor:pointer; font-weight:500; }
+    .post-back:hover { color:#0F172A; }
+    .post-hero.has-hero-img .post-back { color:rgba(255,255,255,0.9); text-shadow:0 1px 4px rgba(0,0,0,0.4); }
+    .post-hero.has-hero-img .post-back:hover { color:#fff; }
+    .post-content { background:rgba(0,0,0,0.02); border-radius:1rem; padding:2.5rem; line-height:1.8; }
+    .post-content h2 { font-size:1.4rem; font-weight:700; margin:2.5rem 0 1rem; font-family:var(--font-heading, 'Inter', system-ui, sans-serif); }
+    .post-content h3 { font-size:1.15rem; font-weight:600; margin:2rem 0 0.75rem; }
+    .post-content p { line-height:1.8; margin-bottom:1rem; }
+    .post-content ul { padding-left:1.5rem; margin-bottom:1rem; list-style:disc; }
+    .post-content ol { padding-left:1.5rem; margin-bottom:1rem; list-style:decimal; }
+    .post-content li { margin-bottom:0.5rem; line-height:1.7; }
+    .post-content blockquote { border-left:3px solid #BF0101; padding:1rem 1.5rem; margin:1.5rem 0; background:rgba(0,0,0,0.03); border-radius:0 0.5rem 0.5rem 0; font-style:italic; }
+    .post-content a { color:#BF0101; text-decoration:underline; }
+    .post-content strong { font-weight:600; }
+    .post-content img { width:100%; border-radius:0.75rem; display:block; }
+    .post-content figure { margin:2rem 0; }
+    .post-content figcaption { text-align:center; font-size:0.85rem; opacity:0.6; margin-top:0.5rem; }
+
+    /* TOC */
+    .toc-box { background:rgba(0,0,0,0.03); border:1px solid rgba(0,0,0,0.08); border-radius:0.75rem; padding:1.5rem 2rem; margin-bottom:2rem; }
+    .toc-box h4 { font-size:0.9rem; font-weight:700; margin-bottom:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:rgba(0,0,0,0.5); }
+    .toc-box ul { list-style:none; padding:0; margin:0; }
+    .toc-box li { margin-bottom:0.35rem; }
+    .toc-box a { color:#0F172A; text-decoration:none; font-size:0.9rem; transition:color 0.2s; }
+    .toc-box a:hover { color:#BF0101; }
+    .toc-box .toc-h3 { padding-left:1.25rem; font-size:0.85rem; color:rgba(0,0,0,0.5); }
+    .toc-box .toc-h3:hover { color:#BF0101; }
+
+    /* Related Posts */
+    .related-section { margin-top:4rem; padding-top:2.5rem; border-top:1px solid rgba(0,0,0,0.08); }
+    .related-section h3 { font-size:1.2rem; font-weight:700; margin-bottom:1.5rem; font-family:var(--font-heading, 'Inter', system-ui, sans-serif); }
+    .related-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:1.25rem; }
+    .related-card { background:rgba(0,0,0,0.03); border:1px solid rgba(0,0,0,0.08); border-radius:0.75rem; overflow:hidden; text-decoration:none; color:inherit; transition:all 0.3s; display:block; }
+    .related-card:hover { border-color:#BF0101; transform:translateY(-2px); }
+    .related-card-img { width:100%; height:140px; background-size:cover; background-position:center; }
+    .related-card-body { padding:1rem 1.25rem 1.25rem; }
+    .related-card h4 { font-size:0.95rem; font-weight:600; margin-bottom:0.5rem; line-height:1.3; }
+    .related-card p { font-size:0.8rem; color:rgba(0,0,0,0.5); line-height:1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+
+    /* Headings */
+    .blog-heading { font-family:var(--font-heading, 'Inter', system-ui, sans-serif); }
+
+    /* Fade in */
+    .fade-in { animation: fadeIn 0.3s ease-out; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+    @media (max-width: 640px) {
+      .post-hero { padding: 3rem 1rem 2.5rem; }
+      .post-content { padding: 1.5rem; }
+      .blog-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body class="font-body antialiased overflow-x-hidden" style="background:#F8FAFC;color:#0F172A">
+
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="flex items-center gap-2 cursor-pointer">
+          <div class="w-10 h-10 bg-[#BF0101] text-white flex items-center justify-center rounded-lg font-bold text-xl tracking-tighter">
+            IM
+          </div>
+          <span class="font-bold text-xl tracking-tight text-slate-900">Im-immobilien</span>
+        </div>
+        <div class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
+          <a href="index.html#leistungen" class="hover:text-[#BF0101] transition-colors">Leistungen</a>
+          <a href="index.html#angebote" class="hover:text-[#BF0101] transition-colors">Angebote</a>
+          <a href="index.html#ablauf" class="hover:text-[#BF0101] transition-colors">Ablauf</a>
+          <a href="index.html#ueber-uns" class="hover:text-[#BF0101] transition-colors">Über uns</a>
+        </div>
+        <a href="index.html#bewertung" class="hidden md:inline-flex items-center justify-center px-6 py-2.5 bg-[#BF0101] text-white font-medium text-sm rounded-full hover:bg-red-800 transition-colors cta-pulse">
+          Bewertung anfragen
+        </a>
+        <button class="md:hidden text-slate-900">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="6" x2="20" y2="6" /><line x1="4" y1="18" x2="20" y2="18" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  <div style="height:5rem;"></div>
+
+  <div id="blog-app">
+    <div style="text-align:center; padding:4rem; color:rgba(0,0,0,0.5);">Blog wird geladen...</div>
+  </div>
+
+  <footer class="bg-[#020617] pt-20 pb-10 border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+          <div>
+            <div class="flex items-center gap-2 mb-6">
+              <div class="w-8 h-8 bg-[#BF0101] text-white flex items-center justify-center rounded font-bold text-sm tracking-tighter">
+                IM
+              </div>
+              <span class="font-bold text-xl tracking-tight text-white">Im-immobilien</span>
+            </div>
+            <p class="text-slate-400 mb-6 max-w-sm">
+              Ihr zuverlässiger Partner für Immobilien in Osnabrück. Wir vermitteln Werte mit Expertise und Leidenschaft.
+            </p>
+          </div>
+          
+          <div>
+            <h4 class="text-white font-bold mb-6">Kontakt</h4>
+            <ul class="space-y-4 text-slate-400">
+              <li class="flex items-start gap-3">
+                <svg class="w-5 h-5 shrink-0 mt-0.5 text-[#BF0101]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" />
+                </svg>
+                <span>Gerdensiek 8<br/>49152 Bad Essen</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 shrink-0 text-[#BF0101]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <a href="tel:01757466174" class="hover:text-white transition-colors">0175 74 661 74</a>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg class="w-5 h-5 shrink-0 text-[#BF0101]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+                </svg>
+                <a href="mailto:info@im-immobilien.eu" class="hover:text-white transition-colors">info@im-immobilien.eu</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 class="text-white font-bold mb-6">Rechtliches</h4>
+            <ul class="space-y-3 text-slate-400">
+              <li><a href="impressum.html" class="hover:text-[#BF0101] transition-colors">Impressum</a></li>
+              <li><a href="datenschutz.html" class="hover:text-[#BF0101] transition-colors">Datenschutz</a></li>
+              <li><a href="#" class="hover:text-[#BF0101] transition-colors">AGB</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="pt-8 border-t border-white/10 text-center text-slate-500 text-sm flex flex-col md:flex-row justify-between items-center">
+          <p>&copy; 2026 IM Immobilien GmbH. Alle Rechte vorbehalten.</p>
+          <p class="mt-2 md:mt-0">Design by Awwwards Studio</p>
+        </div>
+      </div>
+    </footer>
+
+  <script>
+  (function() {
+    var ACCENT = "#BF0101";
+    var MUTED = "rgba(0,0,0,0.5)";
+    var COMPANY = "Im-immobilien Osnabrück";
+    var SITE_URL = "http://152.53.182.209/im-immobilien-osnabrueck-6qng";
+    var INDUSTRY = "Immobilienmakler";
+    var LOCATION = "Osnabrück";
+    var app = document.getElementById("blog-app");
+
+    function formatDate(dateStr) {
+      var d = new Date(dateStr);
+      return d.toLocaleDateString("de-DE", { day: "2-digit", month: "long", year: "numeric" });
+    }
+
+    // ─── SEO: Dynamic meta tags + schema markup ─────────────
+    function updateSEO(post) {
+      // Title
+      document.title = post
+        ? (post.metaTitle || post.title) + " — " + COMPANY
+        : "Blog — " + COMPANY;
+
+      // Meta description
+      var descEl = document.querySelector('meta[name="description"]');
+      if (!descEl) { descEl = document.createElement("meta"); descEl.setAttribute("name", "description"); document.head.appendChild(descEl); }
+      descEl.setAttribute("content", post ? (post.metaDescription || post.excerpt || "") : COMPANY + " Blog — Aktuelle Beitraege und Ratgeber");
+
+      // Canonical URL
+      var canonEl = document.getElementById("canonical-url");
+      if (canonEl) { canonEl.setAttribute("href", post ? SITE_URL + "/blog.html#" + post.id : SITE_URL + "/blog.html"); }
+
+      // Open Graph
+      setMeta("og:title", post ? (post.metaTitle || post.title) : "Blog — " + COMPANY);
+      setMeta("og:description", post ? (post.metaDescription || post.excerpt || "") : COMPANY + " Blog");
+      setMeta("og:url", post ? SITE_URL + "/blog.html#" + post.id : SITE_URL + "/blog.html");
+      setMeta("og:type", post ? "article" : "website");
+      if (post && post.headerImage) { setMeta("og:image", SITE_URL + "/" + post.headerImage); }
+
+      // Remove old JSON-LD
+      var oldLd = document.querySelectorAll('script[data-seo="blog"]');
+      oldLd.forEach(function(el) { el.remove(); });
+
+      if (post) {
+        // BlogPosting Schema
+        var blogSchema = {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": post.title,
+          "description": post.metaDescription || post.excerpt || "",
+          "datePublished": post.date,
+          "dateModified": post.date,
+          "author": { "@type": "Person", "name": post.author || "OpenClaw AI" },
+          "publisher": { "@type": "Organization", "name": COMPANY },
+          "mainEntityOfPage": { "@type": "WebPage", "@id": SITE_URL + "/blog.html#" + post.id }
+        };
+        if (post.headerImage) { blogSchema.image = SITE_URL + "/" + post.headerImage; }
+        if (post.keywords && post.keywords.length) { blogSchema.keywords = post.keywords.join(", "); }
+        injectJsonLd(blogSchema);
+
+        // BreadcrumbList Schema
+        injectJsonLd({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Startseite", "item": SITE_URL + "/index.html" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": SITE_URL + "/blog.html" },
+            { "@type": "ListItem", "position": 3, "name": post.title, "item": SITE_URL + "/blog.html#" + post.id }
+          ]
+        });
+      }
+    }
+
+    function setMeta(prop, content) {
+      var el = document.querySelector('meta[property="' + prop + '"]');
+      if (!el) { el = document.createElement("meta"); el.setAttribute("property", prop); document.head.appendChild(el); }
+      el.setAttribute("content", content);
+    }
+
+    function injectJsonLd(schema) {
+      var script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.setAttribute("data-seo", "blog");
+      script.textContent = JSON.stringify(schema);
+      document.head.appendChild(script);
+    }
+
+    // ─── TOC: Build table of contents from headings ─────────
+    function buildTOC(content) {
+      var tmp = document.createElement("div");
+      tmp.innerHTML = content;
+      var headings = tmp.querySelectorAll("h2, h3");
+      if (headings.length < 3) return "";
+      var items = [];
+      for (var i = 0; i < headings.length; i++) {
+        var h = headings[i];
+        var id = h.textContent.toLowerCase().replace(/[^a-z0-9äöüß]+/g, "-").replace(/^-|-$/g, "");
+        var level = h.tagName.toLowerCase();
+        items.push({ id: id, text: h.textContent, level: level });
+      }
+      var tocHtml = '<div class="toc-box"><h4>Inhalt</h4><ul>';
+      items.forEach(function(it) {
+        var cls = it.level === "h3" ? ' class="toc-h3"' : '';
+        tocHtml += '<li><a href="#toc-' + it.id + '"' + cls + '>' + it.text + '</a></li>';
+      });
+      tocHtml += '</ul></div>';
+      return tocHtml;
+    }
+
+    function addHeadingIds(content) {
+      return content.replace(/<(h[23])([^>]*)>(.*?)<\/h[23]>/gi, function(m, tag, attrs, text) {
+        var id = text.replace(/<[^>]+>/g, "").toLowerCase().replace(/[^a-z0-9äöüß]+/g, "-").replace(/^-|-$/g, "");
+        return "<" + tag + attrs + ' id="toc-' + id + '">' + text + "</" + tag + ">";
+      });
+    }
+
+    // ─── Related Posts: find similar posts ──────────────────
+    function getRelatedPosts(currentPost, allPosts, count) {
+      count = count || 3;
+      var scored = [];
+      var curKw = (currentPost.keywords || []).map(function(k) { return k.toLowerCase(); });
+      var curFk = (currentPost.focusKeyword || "").toLowerCase();
+
+      allPosts.forEach(function(p) {
+        if (p.id === currentPost.id) return;
+        var score = 0;
+        if (p.category === currentPost.category) score += 3;
+        var pKw = (p.keywords || []).map(function(k) { return k.toLowerCase(); });
+        var pFk = (p.focusKeyword || "").toLowerCase();
+        curKw.forEach(function(k) { if (pKw.indexOf(k) !== -1) score += 2; });
+        if (curFk && pFk && (pFk.indexOf(curFk) !== -1 || curFk.indexOf(pFk) !== -1)) score += 3;
+        // Title word overlap
+        var curWords = currentPost.title.toLowerCase().split(/\s+/);
+        var pWords = p.title.toLowerCase().split(/\s+/);
+        curWords.forEach(function(w) { if (w.length > 4 && pWords.indexOf(w) !== -1) score += 1; });
+        if (score > 0) scored.push({ post: p, score: score });
+      });
+      scored.sort(function(a, b) { return b.score - a.score; });
+      return scored.slice(0, count).map(function(s) { return s.post; });
+    }
+
+    function renderRelatedPosts(related) {
+      if (!related || related.length === 0) return "";
+      var html = '<div class="related-section"><h3>Weitere Beitraege</h3><div class="related-grid">';
+      related.forEach(function(p) {
+        html += '<a class="related-card" href="#' + p.id + '">';
+        if (p.headerImage) html += '<div class="related-card-img" style="background-image:url(\'' + p.headerImage + '\')"></div>';
+        html += '<div class="related-card-body">';
+        html += '<h4>' + p.title + '</h4>';
+        html += '<p>' + (p.excerpt || "") + '</p>';
+        html += '</div></a>';
+      });
+      html += '</div></div>';
+      return html;
+    }
+
+    // ─── Internal Links: auto-link keywords to other posts ──
+    function clientAddInternalLinks(content, allPosts, currentId) {
+      var linked = 0;
+      var usedIds = {};
+      allPosts.forEach(function(p) {
+        if (p.id === currentId || linked >= 3 || usedIds[p.id]) return;
+        var kw = p.focusKeyword;
+        if (!kw || kw.length < 4) return;
+        var idx = content.toLowerCase().indexOf(kw.toLowerCase());
+        if (idx === -1) return;
+        // Check it's inside a <p> tag and not inside an <a>
+        var before = content.slice(0, idx);
+        var lastPOpen = before.lastIndexOf("<p");
+        var lastPClose = before.lastIndexOf("</p>");
+        if (lastPOpen < 0 || lastPClose > lastPOpen) return;
+        var lastAOpen = before.lastIndexOf("<a ");
+        var lastAClose = before.lastIndexOf("</a>");
+        if (lastAOpen > lastAClose) return;
+        var match = content.slice(idx, idx + kw.length);
+        content = content.slice(0, idx) + '<a href="blog.html#' + p.id + '" style="color:inherit; text-decoration:underline;">' + match + '</a>' + content.slice(idx + kw.length);
+        linked++;
+        usedIds[p.id] = true;
+      });
+      return content;
+    }
+
+    function renderOverview(posts) {
+      updateSEO(null);
+      var html = '<div style="padding:4rem 1.5rem 2rem; text-align:center;" class="fade-in">';
+      html += '<h1 class="blog-heading" style="font-size:2.5rem; font-weight:800; margin-bottom:0.5rem;">Blog</h1>';
+      html += '<p style="color:' + MUTED + '; font-size:1rem;">Aktuelle Beitraege' + (LOCATION ? ' aus ' + LOCATION : '') + '</p>';
+      html += '</div>';
+
+      html += '<div style="max-width:1000px; margin:0 auto; padding:0 1.5rem 6rem;">';
+      if (posts.length === 0) {
+        html += '<p style="color:' + MUTED + '; text-align:center;">Noch keine Beitraege vorhanden.</p>';
+      } else {
+        html += '<div class="blog-grid">';
+        posts.forEach(function(p) {
+          html += '<a class="blog-card" href="#' + p.id + '">';
+          if (p.headerImage) {
+            html += '<div class="blog-card-img" style="background-image:url(\'' + p.headerImage + '\')"></div>';
+          }
+          html += '<div class="blog-card-body">';
+          html += '<span class="blog-tag">' + (p.category || "Blog") + '</span>';
+          html += '<h3>' + p.title + '</h3>';
+          html += '<p>' + (p.excerpt || "") + '</p>';
+          html += '<div class="blog-meta">' + formatDate(p.date) + ' &middot; ' + (p.author || "OpenClaw AI") + '</div>';
+          html += '</div>';
+          html += '</a>';
+        });
+        html += '</div>';
+      }
+      html += '</div>';
+      app.innerHTML = html;
+    }
+
+    function renderPost(post, allPosts) {
+      updateSEO(post);
+      var content = post.content;
+
+      // Add internal links (client-side)
+      content = clientAddInternalLinks(content, allPosts || [], post.id);
+
+      // Add heading IDs for TOC
+      content = addHeadingIds(content);
+
+      // Build TOC
+      var toc = buildTOC(content);
+
+      // Get related posts
+      var related = getRelatedPosts(post, allPosts || [], 3);
+
+      var html = '';
+      if (post.headerImage) {
+        html += '<div class="post-hero has-hero-img fade-in" style="background-image:url(\'' + post.headerImage + '\')">';
+      } else {
+        html += '<div class="post-hero fade-in">';
+      }
+      html += '<a class="post-back" onclick="location.hash=\'\'; return false;" href="blog.html">&larr; Alle Beitraege</a>';
+      html += '<span class="blog-tag" style="margin-bottom:1.5rem;">' + (post.category || "Blog") + '</span>';
+      html += '<h1>' + post.title + '</h1>';
+      html += '<p class="blog-meta-hero" style="color:' + MUTED + '; font-size:0.9rem;">' + formatDate(post.date) + ' &middot; ' + (post.author || "OpenClaw AI") + '</p>';
+      html += '</div>';
+      html += '<main style="max-width:800px; margin:0 auto; padding:3rem 1.5rem 6rem;">';
+      html += toc;
+      html += '<article class="post-content">' + content + '</article>';
+      html += renderRelatedPosts(related);
+      html += '</main>';
+      app.innerHTML = html;
+      window.scrollTo(0, 0);
+
+      // Smooth scroll for TOC links
+      app.querySelectorAll(".toc-box a").forEach(function(a) {
+        a.addEventListener("click", function(e) {
+          e.preventDefault();
+          var target = document.getElementById(a.getAttribute("href").replace("#", ""));
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+    }
+
+    function route(posts) {
+      var hash = location.hash.replace("#", "");
+      if (hash) {
+        var post = posts.find(function(p) { return p.id === hash; });
+        if (post) { renderPost(post, posts); return; }
+      }
+      renderOverview(posts);
+    }
+
+    fetch("manifest.json")
+      .then(function(r) { return r.json(); })
+      .then(function(manifest) {
+        var posts = (manifest.blog && manifest.blog.posts) || [];
+        posts.sort(function(a, b) { return b.date.localeCompare(a.date); });
+
+        // Inject LocalBusiness schema once
+        var biz = { "@context": "https://schema.org", "@type": "LocalBusiness", "name": COMPANY, "url": SITE_URL + "/index.html" };
+        if (INDUSTRY) biz["@type"] = INDUSTRY;
+        if (LOCATION) biz.areaServed = { "@type": "City", "name": LOCATION };
+        if (manifest.contactEmail) biz.email = manifest.contactEmail;
+        if (manifest.contactPhone) biz.telephone = manifest.contactPhone;
+        if (manifest.address || LOCATION) biz.address = { "@type": "PostalAddress", "addressLocality": LOCATION, "addressCountry": "DE" };
+        injectJsonLd(biz);
+
+        route(posts);
+        window.addEventListener("hashchange", function() { route(posts); });
+      })
+      .catch(function() {
+        app.innerHTML = '<div style="text-align:center; padding:4rem; color:' + MUTED + ';">Blog konnte nicht geladen werden.</div>';
+      });
+  })();
+  </script>
+
+</body>
+</html>
