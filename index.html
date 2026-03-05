@@ -3,12 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Im-immobilien Osnabrück | Ihr zuverlässiger Partner für Immobilien in Osnabrück</title>
-  <meta name="description" content="Im-immobilien Osnabrück — Immobilienmakler in Osnabrück">
-  <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#FAF7F2">
-  <meta name="openclaw-project" content="im-immobilien-osnabrueck-pk9s">
-  <meta name="openclaw-version" content="4">
+  <title>IM Immobilien GmbH | Kostenlose Immobilienbewertung Bad Essen & Osnabrücker Land</title>
+  <meta name="openclaw-project" content="im-immobilien-osnabrueck-6qng">
+  <meta name="openclaw-version" content="5">
   <meta name="openclaw-engine" content="react-gsap">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,645 +13,896 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
   
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"brand":{"DEFAULT":"#B87333","text":"#111111","light":"rgba(184, 115, 51,0.15)","glow":"rgba(184, 115, 51,0.08)"},"surface":{"DEFAULT":"#FAF7F2","alt":"#F0EDE6","card":"#FFFFFF"},"content":{"DEFAULT":"#2C2418","secondary":"#6B5D4F"},"card-border":"rgba(44,36,24,0.08)"},"fontFamily":{"heading":["'DM Serif Display'","system-ui","sans-serif"],"body":["'Source Sans 3'","system-ui","sans-serif"],"drama":["'Cormorant Garamond'","Georgia","Times New Roman","serif"]}}}}</script>
+  <script>tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"brand":{"DEFAULT":"#BF0101","text":"#ffffff","light":"rgba(191, 1, 1,0.15)","glow":"rgba(191, 1, 1,0.08)"},"surface":{"DEFAULT":"#F8FAFC","alt":"#F0F2F5","card":"#ffffff"},"content":{"DEFAULT":"#0F172A","secondary":"#64748B"},"card-border":"rgba(0,0,0,0.08)"},"fontFamily":{"heading":["'Inter'","system-ui","sans-serif"],"body":["'Inter'","system-ui","sans-serif"],"drama":["'Playfair Display'","Georgia","Times New Roman","serif"]}}}}</script>
   
   <link rel="stylesheet" href="styles.css">
+
+<style id="oc-form-styles">
+  .oc-form-overlay{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;padding:1rem;opacity:0;transition:opacity .3s ease;}
+  .oc-form-overlay.oc-form-visible{opacity:1;}
+  .oc-form-backdrop{position:absolute;inset:0;background:rgba(0,0,0,0.4);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);}
+  .oc-form-container{position:relative;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;padding:2.5rem;border-radius:8px;background:#F8FAFC;box-shadow:0 20px 60px rgba(0,0,0,0.08);border:1px solid rgba(0,0,0,0.06);scrollbar-width:thin;scrollbar-color:rgba(0,0,0,0.08) transparent;}
+  .oc-form-container::-webkit-scrollbar{width:6px;}
+  .oc-form-container::-webkit-scrollbar-thumb{background:rgba(0,0,0,0.08);border-radius:3px;}
+  .oc-form-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:#64748B;font-size:1.5rem;cursor:pointer;width:2rem;height:2rem;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;}
+  .oc-form-close:hover{color:#0F172A;background:rgba(0,0,0,0.03);}
+  .oc-form-title{font-family:'Inter',system-ui,sans-serif;font-size:1.5rem;font-weight:700;color:#0F172A;margin-bottom:0.25rem;line-height:1.2;}
+  .oc-form-subtitle{color:#64748B;font-size:0.9rem;margin-bottom:2rem;line-height:1.5;}
+  .oc-form-group{margin-bottom:1.25rem;}
+  .oc-form-label{display:block;font-size:0.8rem;font-weight:600;color:#64748B;margin-bottom:0.5rem;letter-spacing:0.02em;text-transform:uppercase;font-family:'Inter',system-ui,sans-serif;}
+  .oc-form-input{width:100%;padding:0.75rem 1rem;background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.08);border-radius:calc(8px * 0.6);color:#0F172A;font-size:0.95rem;font-family:'Inter',system-ui,sans-serif;transition:all .2s;outline:none;-webkit-appearance:none;appearance:none;}
+  .oc-form-input::placeholder{color:#64748B;opacity:0.6;}
+  .oc-form-input:focus{border-color:#BF0101;box-shadow:0 0 0 3px rgba(191, 1, 1,0.15);}
+  .oc-form-input.oc-form-input-error{border-color:#ef4444;box-shadow:0 0 0 3px rgba(239,68,68,0.1);}
+  .oc-form-textarea{resize:vertical;min-height:100px;}
+  .oc-form-error{font-size:0.75rem;color:#ef4444;margin-top:0.35rem;min-height:0;overflow:hidden;transition:all .2s;}
+  .oc-form-submit{width:100%;padding:0.875rem 1.5rem;background:#BF0101;color:#ffffff;border:none;border-radius:calc(8px * 0.6);font-size:1rem;font-weight:600;cursor:pointer;font-family:'Inter',system-ui,sans-serif;transition:all .25s;margin-top:0.5rem;position:relative;overflow:hidden;}
+  .oc-form-submit:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(191, 1, 1,0.3);}
+  .oc-form-submit:active{transform:translateY(0);}
+  .oc-form-submit:disabled{opacity:0.7;cursor:not-allowed;transform:none;}
+  .oc-form-submit-spinner{display:inline-block;width:18px;height:18px;border:2px solid #ffffff40;border-top-color:#ffffff;border-radius:50%;animation:oc-spin .6s linear infinite;vertical-align:middle;margin-left:0.5rem;}
+  @keyframes oc-spin{to{transform:rotate(360deg);}}
+  #oc-form-success{text-align:center;padding:2rem 0;}
+  .oc-form-checkmark{width:64px;height:64px;margin:0 auto 1.5rem;}
+  .oc-form-checkmark circle{stroke:#BF0101;stroke-width:2;fill:none;stroke-dasharray:166;stroke-dashoffset:166;animation:oc-circle .6s ease forwards;}
+  .oc-form-checkmark path{stroke:#BF0101;stroke-width:3;fill:none;stroke-dasharray:48;stroke-dashoffset:48;animation:oc-check .3s .6s ease forwards;}
+  @keyframes oc-circle{to{stroke-dashoffset:0;}}
+  @keyframes oc-check{to{stroke-dashoffset:0;}}
+  .oc-form-success-title{font-family:'Inter',system-ui,sans-serif;font-size:1.3rem;font-weight:700;color:#0F172A;margin-bottom:0.5rem;}
+  .oc-form-success-text{color:#64748B;font-size:0.9rem;line-height:1.6;}
+
+  /* Inline variant: form embedded in CTA section */
+  .oc-form-inline{max-width:520px;margin:0 auto;padding:2rem 0;}
+  .oc-form-inline .oc-form-title{text-align:center;}
+  .oc-form-inline .oc-form-subtitle{text-align:center;}
+
+  @media(max-width:640px){
+    .oc-form-container{padding:1.5rem;max-height:95vh;border-radius:8px 8px 0 0;align-self:flex-end;max-width:100%;}
+    .oc-form-overlay{align-items:flex-end;}
+    .oc-form-title{font-size:1.25rem;}
+  }
+</style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%226%22%20fill%3D%22%23BF0101%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2222%22%20font-family%3D%22system-ui%2Csans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22700%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3EI%3C%2Ftext%3E%3C%2Fsvg%3E">
+  <!-- OpenClaw Meta Tags -->
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="IM Immobilien GmbH — Kostenlose Immobilienbewertung in Bad Essen. Ingo Christoffer & Martin Berkenkamp.">
+  <meta property="og:title" content="IM Immobilien GmbH — Immobilienbewertung Osnabrücker Land">
+  <meta property="og:description" content="IM Immobilien GmbH — Kostenlose Immobilienbewertung in Bad Essen. Ingo Christoffer & Martin Berkenkamp.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="IM Immobilien GmbH — Immobilienbewertung Osnabrücker Land">
+  <meta name="twitter:description" content="IM Immobilien GmbH — Kostenlose Immobilienbewertung in Bad Essen. Ingo Christoffer & Martin Berkenkamp.">
+  <meta name="theme-color" content="#BF0101">
+  <!-- /OpenClaw Meta Tags -->
+<style id="oc-cookie-styles">/* ─── OpenClaw Cookie Banner ─── */
+#oc-cookie-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 99999;
+  font-family: "Inter", system-ui, sans-serif;
+  
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+#oc-cookie-banner.oc-cookie-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+#oc-cookie-box {
+  background: #F8FAFC;
+  color: #0F172A;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  padding: 20px 24px;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+  border-radius: 0; border-left: none; border-right: none; border-bottom: none;
+}
+#oc-cookie-box p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #64748B;
+  margin: 0 0 16px 0;
+}
+#oc-cookie-box a {
+  color: #BF0101;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+#oc-cookie-box a:hover { opacity: 0.8; }
+.oc-cookie-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.oc-cookie-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s, transform 0.1s;
+  font-family: inherit;
+}
+.oc-cookie-btn:hover { opacity: 0.9; }
+.oc-cookie-btn:active { transform: scale(0.97); }
+.oc-cookie-btn-accept {
+  background: #BF0101;
+  color: #ffffff;
+  flex: 1;
+}
+.oc-cookie-btn-decline {
+  background: transparent;
+  color: #64748B;
+  border: 1px solid rgba(0,0,0,0.08);
+  flex: 1;
+}
+.oc-cookie-btn-decline:hover { color: #0F172A; }
+@media (max-width: 480px) {
+  #oc-cookie-box { padding: 16px; }
+  .oc-cookie-buttons { flex-direction: column; }
+  
+}</style>
 </head>
-<body class="font-body antialiased overflow-x-hidden" style="background:#FAF7F2;color:#2C2418">
+<body class="font-body antialiased overflow-x-hidden" style="background:#F8FAFC;color:#0F172A">
   <div id="root"></div>
   
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7/babel.min.js"></script>
   
   <script type="text/babel" data-type="module">
 const App = () => {
-  const { useState, useEffect, useRef, useCallback } = React;
-  gsap.registerPlugin(ScrollTrigger);
+  const { useEffect } = React;
 
-  // --- GLOBAL STATE ---
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  // --- ICONS (Wrapped as requested) ---
-  const IconMapPin = () => (
-    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
-      <><path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></></svg>
-  );
-  const IconStar = () => (
-    <svg viewBox="0 0 24 24" width={24} height={24} fill="currentColor" stroke="none" strokeWidth="2">
-      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-    </svg>
-  );
-  const IconCheck = () => (
-    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-    </svg>
-  );
-  const IconArrowRight = () => (
-    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M4 12h16m-7-7l7 7-7 7" />
-    </svg>
-  );
-  const IconPlus = () => (
-    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-    </svg>
-  );
-  const IconMinus = () => (
-    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12h-15" />
-    </svg>
-  );
-  const IconKey = () => (
-    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" />
-    </svg>
-  );
-  const IconChart = () => (
-    <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
-    </svg>
-  );
-
-  // --- COMPONENTS ---
-
-  const NoiseOverlay = () => (
-    <div className="fixed inset-0 z-[9999] pointer-events-none opacity-[0.03] mix-blend-multiply">
-      <svg width="100%" height="100%">
-        <filter id="noiseFilter">
-          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#noiseFilter)" />
-      </svg>
+  return (
+    <div className="relative w-full overflow-hidden font-sans text-slate-900 bg-slate-50 selection:bg-[#BF0101] selection:text-white">
+      <NoiseOverlay />
+      <Navbar />
+      <Hero useEffect={useEffect} />
+      <Features />
+      <Services />
+      <RealEstateOffers />
+      <Process />
+      <ValuationMockup />
+      <AboutUs />
+      <Testimonials />
+      <FAQ />
+      <CTA />
+      <Footer />
     </div>
   );
+};
 
-  const Navbar = () => {
-    return (
-      <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'py-4 bg-[#FAF7F2]/90 backdrop-blur-md shadow-sm' : 'py-6 bg-transparent'}`}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-          <div className="font-heading text-2xl tracking-wide text-[#2C2418]">
-            Im-immobilien<span className="text-[#B87333]">.</span>
+/* --- COMPONENTS --- */
+
+const NoiseOverlay = () => (
+  <svg className="pointer-events-none fixed inset-0 z-[9999] h-full w-full opacity-[0.04]" xmlns="http://www.w3.org/2000/svg">
+    <filter id="noiseFilter">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#noiseFilter)" />
+  </svg>
+);
+
+const Navbar = () => {
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 transition-all duration-300">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="flex items-center gap-2 cursor-pointer">
+          <div className="w-10 h-10 bg-[#BF0101] text-white flex items-center justify-center rounded-lg font-bold text-xl tracking-tighter">
+            IM
           </div>
-          <div className="hidden md:flex gap-8 items-center text-[#6B5D4F] font-body text-sm uppercase tracking-widest font-semibold">
-            <a href="#leistungen" className="hover:text-[#B87333] transition-colors">Leistungen</a>
-            <a href="#prozess" className="hover:text-[#B87333] transition-colors">Ablauf</a>
-            <a href="#faq" className="hover:text-[#B87333] transition-colors">FAQ</a>
-          </div>
-          <button className="bg-[#2C2418] text-[#FAF7F2] px-6 py-2.5 rounded-none font-body text-sm uppercase tracking-wider hover:bg-[#B87333] transition-colors duration-300">
-            Kontakt
-          </button>
+          <span className="font-bold text-xl tracking-tight text-slate-900">IM Immobilien</span>
         </div>
-      </nav>
-    );
-  };
+        <div className="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
+          <a href="#leistungen" className="hover:text-[#BF0101] transition-colors">Leistungen</a>
+          <a href="#angebote" className="hover:text-[#BF0101] transition-colors">Referenzen</a>
+          <a href="#ablauf" className="hover:text-[#BF0101] transition-colors">Ablauf</a>
+          <a href="#bewertung" className="hover:text-[#BF0101] transition-colors font-bold text-[#BF0101]">Bewertung</a>
+          <a href="#ueber-uns" className="hover:text-[#BF0101] transition-colors">Über uns</a>
+        </div>
+        <a href="#bewertung" className="hidden md:inline-flex items-center justify-center px-6 py-2.5 bg-[#BF0101] text-white font-medium text-sm rounded-full hover:bg-red-800 transition-colors cta-pulse">
+          Bewertung anfragen
+        </a>
+        <button className="md:hidden text-slate-900">
+          <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
+            <><><line x1="4" y1="12" x2="20" y2="12" /><line x1="4" y1="6" x2="20" y2="6" /><line x1="4" y1="18" x2="20" y2="18" /></></>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  );
+};
 
-  const Hero = () => {
-    return (
-      <section className="relative min-h-screen flex flex-col lg:flex-row items-stretch bg-[#FAF7F2] overflow-hidden">
+const Hero = ({ useEffect }) => {
+  useEffect(() => {
+    if (typeof gsap !== 'undefined') {
+      gsap.from('.hero-element', {
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.1,
+        ease: 'power3.out',
+        delay: 0.2
+      });
+    }
+  }, [useEffect]);
 
-        {/* Left Content Side */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-12 lg:py-0 relative z-10 order-2 lg:order-1">
-          <div className="hero-content w-full max-w-xl mx-auto lg:mx-0">
-            <h1 className="font-heading text-5xl md:text-7xl lg:text-[5rem] leading-[1.05] text-[#2C2418] mb-8 hero-fade-in" style={{animationDelay: '0.1s'}}>
-              Finden Sie Ihr <br />
-              <span className="font-drama italic text-[#B87333] pr-2">perfektes Zuhause</span> <br />
-              bei uns.
-            </h1>
-            
-            <p className="font-body text-lg md:text-xl text-[#6B5D4F] mb-10 leading-relaxed max-w-lg hero-fade-in" style={{animationDelay: '0.25s'}}>
-              Entdecken Sie handverlesene Immobilien, Expertenberatung und einen reibungslosen Ablauf – egal ob Sie kaufen, verkaufen oder investieren möchten.
-            </p>
-            
-            <div className="flex flex-wrap gap-4 mb-16 hero-fade-in" style={{animationDelay: '0.4s'}}>
-              <button className="group relative inline-flex items-center justify-center px-10 py-4 bg-[#2C2418] text-white font-body text-sm uppercase tracking-widest font-semibold overflow-hidden transition-all hover:bg-[#B87333] shadow-lg hover:shadow-[#B87333]/20">
-                <span className="relative z-10 flex items-center gap-3">
-                  Objekte ansehen <span className="group-hover:translate-x-1 transition-transform"><IconArrowRight /></span>
-                </span>
-              </button>
+  return (
+    <section className="relative pt-40 pb-28 px-6 md:px-12 max-w-7xl mx-auto bg-[#F8FAFC]">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+        <div className="flex flex-col justify-center">
+          <div className="hero-element inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-sm font-medium mb-8 w-fit shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#BF0101] dot-pulse"></span>
+            Immobilienbewertung Bad Essen
+          </div>
+          <h1 className="hero-element text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-slate-900 leading-[1.1] mb-6">
+            Was ist Ihre Immobilie{' '}
+            <span className="font-drama text-[#BF0101]">wirklich</span>{' '}wert?
+          </h1>
+          <p className="hero-element text-lg md:text-xl text-slate-600 mb-10 max-w-lg leading-relaxed">
+            Kostenlose Marktwertanalyse in 48 Stunden. Ingo Christoffer und Martin Berkenkamp kennen jede Straße im Osnabrücker Land.
+          </p>
+          <div className="hero-element flex flex-col sm:flex-row gap-4 mb-12">
+            <a href="#bewertung" className="inline-flex items-center justify-center px-8 py-4 bg-[#BF0101] text-white font-medium rounded-full hover:bg-red-800 transition-colors text-lg cta-pulse">
+              Immobilienbewertung anfragen
+              <svg className="ml-2 w-5 h-5" viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2">
+                <><><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></></>
+              </svg>
+            </a>
+          </div>
+          <div className="hero-element flex items-center gap-8 pt-8 border-t border-slate-200/60">
+            <div>
+              <div className="text-3xl font-bold text-slate-900">187</div>
+              <div className="text-sm text-slate-500 font-medium">Vermittelte Objekte</div>
             </div>
-
-            {/* Trust Indicators / Avatars */}
-            <div className="flex items-center gap-6 hero-avatars hero-fade-in" style={{animationDelay: '0.55s'}}>
-              <div className="flex -space-x-4">
-                {[
-                  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100",
-                  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&h=100",
-                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100",
-                  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100"
-                ].map((src, i) => (
-                  <div key={i} className="w-12 h-12 rounded-full border-2 border-[#FAF7F2] overflow-hidden bg-[#E8E3D9] relative shadow-sm">
-                    <img 
-                      src={src} 
-                      alt="Kunde" 
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-                <div className="w-12 h-12 rounded-full border-2 border-[#FAF7F2] bg-[#2C2418] text-[#FAF7F2] flex items-center justify-center font-heading text-sm pt-1 shadow-sm">
-                  500+
-                </div>
-              </div>
-              
-              <div className="flex flex-col justify-center">
-                <div className="flex text-[#B87333] gap-0.5 text-sm mb-1">
-                  <IconStar /><IconStar /><IconStar /><IconStar /><IconStar />
-                </div>
-                <span className="font-heading text-[#2C2418] text-sm tracking-wide">Vertraut von glücklichen Kunden</span>
+            <div className="w-px h-12 bg-slate-200"></div>
+            <div>
+              <div className="text-3xl font-bold text-slate-900">23</div>
+              <div className="text-sm text-slate-500 font-medium">Tage Vermarktungsdauer</div>
+            </div>
+            <div className="w-px h-12 bg-slate-200 hidden sm:block"></div>
+            <div className="hidden sm:block">
+              <div className="text-3xl font-bold text-slate-900">97,2%</div>
+              <div className="text-sm text-slate-500 font-medium flex items-center gap-1">
+                Angebotspreis-Quote
               </div>
             </div>
           </div>
         </div>
-
-        {/* Right Image Side */}
-        <div className="w-full lg:w-1/2 min-h-[50vh] lg:h-screen relative order-1 lg:order-2">
-          <div className="absolute inset-0 bg-[#2C2418]/5 z-10 pointer-events-none" />
-          <img
-            src="https://lh3.googleusercontent.com/d/1XMY7dLbaOdqbdUDZNbGj1pYxJGgDwjSV"
-            alt="Moderne Architektur in Osnabrück"
-            className="hero-image w-full h-full object-cover object-center hero-fade-in" style={{animationDelay: '0.2s'}}
+        
+        <div className="hero-element relative">
+          <div className="absolute inset-0 bg-[#BF0101]/5 rounded-2xl transform translate-x-4 translate-y-4 -z-10"></div>
+          <img 
+            src="./assets/img-hero-portrait.png" 
+            alt="Modernes Wohnhaus im Osnabrücker Land" 
+            className="w-full h-[550px] md:h-[650px] object-cover rounded-2xl shadow-2xl"
           />
+          
+          <div className="absolute -bottom-8 -left-8 bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-white/40 animate-float flex items-center gap-5 z-20 max-w-xs">
+            <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-green-600 shrink-0">
+              <svg viewBox="0 0 24 24" width={24} height={24} fill="none" stroke="currentColor" strokeWidth="2.5">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </div>
+            <div>
+              <div className="font-bold text-slate-900">97,2% Angebotspreis-Quote</div>
+              <div className="text-xs text-slate-500 mt-0.5">Durchschnitt über 187 vermittelte Objekte</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Features = () => {
+  const features = [
+    {
+      icon: <><><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></></>,
+      title: "Faire Bewertung",
+      desc: "Keine überhöhten Fantasiepreise, um den Auftrag zu bekommen. Wir sagen Ihnen, was Ihre Immobilie wirklich wert ist — ehrlich und marktgerecht."
+    },
+    {
+      icon: <><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></>,
+      title: "Persönliche Betreuung",
+      desc: "Von Bad Essen über Bohmte bis Osnabrück — wir kennen jeden Stadtteil, jede Mikrolage und jeden Quadratmeterpreis in der Region."
+    },
+    {
+      icon: <><><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></></>,
+      title: "Persönliche Betreuung",
+      desc: "Ingo Christoffer und Martin Berkenkamp betreuen Sie persönlich — vom Erstgespräch bis zur Schlüsselübergabe. Kein wechselnder Ansprechpartner."
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-[#F0F2F5] bg-dots relative" id="vorteile">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="text-center max-w-2xl mx-auto mb-16 reveal">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Warum IM Immobilien?</h2>
+          <p className="text-slate-600 text-lg">Zwei Geschäftsführer. Persönliche Betreuung. Kein Callcenter.</p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feat, idx) => (
+            <div key={idx} className="reveal card-shimmer bg-white p-8 rounded-2xl shadow-sm border border-slate-100" style={{ transitionDelay: `${idx * 0.15}s` }}>
+              <div className="w-14 h-14 rounded-xl bg-[#BF0101]/10 text-[#BF0101] flex items-center justify-center mb-6 animate-breathe">
+                <svg viewBox="0 0 24 24" width={28} height={28} fill="none" stroke="currentColor" strokeWidth="2">
+                  {feat.icon}
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">{feat.title}</h3>
+              <p className="text-slate-600 leading-relaxed">{feat.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Services = () => {
+  const services = [
+    {
+      title: "Immobilienbewertung",
+      desc: "Kostenlose Marktwertanalyse auf Basis aktueller Verkaufsdaten aus dem Osnabrücker Land. Sie erfahren innerhalb von 48 Stunden, was Ihre Immobilie heute wert ist.",
+      img: "./assets/img-bewertung.png",
+      className: "md:col-span-2 md:row-span-2"
+    },
+    {
+      title: "Verkauf & Vermarktung",
+      desc: "Professionelle Exposés, qualifizierte Käufer mit Finanzierungsnachweis und gezielte Vermarktung — damit Ihr Objekt nicht monatelang am Markt steht.",
+      img: "./assets/img-verkauf.png",
+      className: "md:col-span-1 md:row-span-1"
+    },
+    {
+      title: "Verkaufsabwicklung",
+      desc: "Vom Erstgespräch bis zum Notartermin begleiten wir jeden Schritt. Bonitätsprüfung, Kaufpreisverhandlung, Grundbuch — Sie müssen sich um nichts kümmern.",
+      img: "./assets/img-abwicklung.png",
+      className: "md:col-span-1 md:row-span-1"
+    },
+    {
+      title: "Kapitalanlage-Beratung",
+      desc: "Renditestarke Objekte in Bad Essen, Bohmte und Osnabrück. Transparente Standortanalyse und realistische Kalkulation statt leerer Versprechen.",
+      img: "./assets/img-kapitalanlage.png",
+      className: "md:col-span-2 md:row-span-1"
+    },
+    {
+      title: "Gewerbeimmobilien",
+      desc: "Büroflächen, Lagerhallen, Gewerbegrundstücke im Osnabrücker Land. Wir kennen den lokalen Markt und finden Käufer, die zur Immobilie passen.",
+      img: "./assets/img-gewerbe.png",
+      className: "md:col-span-1 md:row-span-1"
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-[#F8FAFC] watermark relative border-t border-slate-100" data-watermark="LEISTUNGEN" id="leistungen">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="mb-16 reveal">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Leistungen für Eigentümer & Käufer</h2>
+          <p className="text-slate-600 text-lg max-w-2xl">Von der Bewertung bis zum Notartermin — alles aus einer Hand.</p>
         </div>
 
-      </section>
-    );
-  };
-
-  const Features = () => {
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-      let ctx = gsap.context(() => {
-        gsap.from('.feature-item', {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 85%",
-          },
-          x: -30,
-          opacity: 0,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power2.out"
-        });
-      }, sectionRef);
-      return () => ctx.revert();
-    }, []);
-
-    const features = [
-      { icon: <IconMapPin />, title: "Lokale Marktkenntnis", desc: "Tiefgreifendes Wissen über Osnabrück." },
-      { icon: <IconChart />, title: "Präzise Bewertung", desc: "Datengestützte Wertermittlung." },
-      { icon: <IconKey />, title: "Diskrete Vermittlung", desc: "Vertrauensvolle Abwicklung." }
-    ];
-
-    return (
-      <section ref={sectionRef} className="bg-[#F0EDE6] py-12 border-y border-[rgba(44,36,24,0.05)]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-8 divide-y md:divide-y-0 md:divide-x divide-[rgba(44,36,24,0.1)]">
-          {features.map((f, i) => (
-            <div key={i} className="feature-item flex items-center gap-4 w-full md:w-1/3 pt-6 md:pt-0 first:pt-0 md:px-8 first:pl-0 last:pr-0">
-              <div className="text-[#B87333] shrink-0 p-3 bg-white rounded-sm shadow-sm">
-                {f.icon}
+        <div className="grid grid-cols-1 md:grid-cols-3 auto-rows-[280px] gap-6">
+          {services.map((srv, idx) => (
+            <div 
+              key={idx} 
+              className={`reveal card-shimmer group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-slate-200 flex flex-col ${srv.className}`}
+              style={{ transitionDelay: `${idx * 0.1}s` }}
+            >
+              <div className="absolute inset-0 z-0">
+                <img src={srv.img} alt={srv.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent"></div>
               </div>
-              <div>
-                <h3 className="font-heading text-lg text-[#2C2418] mb-1">{f.title}</h3>
-                <p className="font-body text-sm text-[#6B5D4F]">{f.desc}</p>
+              <div className="relative z-10 p-8 flex flex-col h-full justify-end">
+                <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-red-300 transition-colors">{srv.title}</h3>
+                <p className="text-slate-200 text-sm leading-relaxed">{srv.desc}</p>
               </div>
             </div>
           ))}
         </div>
-      </section>
-    );
-  };
 
-  const Services = () => {
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-      let ctx = gsap.context(() => {
-        gsap.from('.service-card', {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-          },
-          y: 50,
-          opacity: 0,
-          stagger: 0.15,
-          duration: 1,
-          ease: "power3.out"
-        });
-      }, sectionRef);
-      return () => ctx.revert();
-    }, []);
-
-    return (
-      <section id="leistungen" ref={sectionRef} className="py-32 bg-[#FAF7F2] relative overflow-hidden">
-        {/* WATERMARK TEXT */}
-        <div className="absolute bottom-0 right-[-5%] text-[clamp(6rem,12vw,16rem)] font-black uppercase tracking-wider text-black opacity-[0.025] pointer-events-none z-0 leading-none">
-          Leistungen
+        <div className="mt-16 text-center reveal">
+          <a href="#bewertung" className="inline-flex items-center justify-center px-8 py-4 bg-[#BF0101] text-white font-medium rounded-full hover:bg-red-800 transition-colors text-lg cta-pulse shadow-lg shadow-red-900/20">
+            Immobilienbewertung anfragen
+          </a>
         </div>
+      </div>
+    </section>
+  );
+};
 
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-8">
-            <div className="max-w-2xl">
-              <h2 className="font-heading text-4xl md:text-5xl text-[#2C2418] mb-6">Unsere Expertise für Ihr Anliegen</h2>
-              <p className="font-body text-lg text-[#6B5D4F]">Maßgeschneiderte Lösungen für Käufer, Verkäufer und Investoren in der Region Osnabrück. Wir begleiten Sie mit Fachkompetenz und Leidenschaft.</p>
-            </div>
-          </div>
-
-          {/* BENTO GRID */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            {/* Card 1: Double Wide */}
-            <div className="service-card group relative col-span-1 md:col-span-2 aspect-square md:aspect-[2/1] overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-500">
-              <img src="https://lh3.googleusercontent.com/d/1c0eTzCZUGLJlnGRF9K_Nqafs-mLw30eK" alt="Immobilienbewertung" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A150E]/90 via-[#1A150E]/40 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-8 md:p-10 w-full">
-                <div className="text-[#B87333] mb-3"><IconChart /></div>
-                <h3 className="font-heading text-3xl text-white mb-3">Immobilienbewertung</h3>
-                <p className="font-body text-[#F0EDE6] max-w-md">Präzise Wertermittlung Ihrer Immobilie durch erfahrene Gutachter. Die Basis für jeden erfolgreichen Verkauf.</p>
-              </div>
-            </div>
-
-            {/* Card 2: Normal */}
-            <div className="service-card group relative col-span-1 aspect-square overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-500">
-              <img src="https://lh3.googleusercontent.com/d/1QaV6lx3sEyGgXuIclhiIZVmoqAVirwrB" alt="Verkauf" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A150E]/90 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-8 w-full">
-                <h3 className="font-heading text-2xl text-white mb-3">Verkauf & Vermarktung</h3>
-                <p className="font-body text-sm text-[#F0EDE6]">Professionelle Vermarktung mit hochwertigen Exposés und breiter Reichweite für den besten Preis.</p>
-              </div>
-            </div>
-
-            {/* Card 3: Normal */}
-            <div className="service-card group relative col-span-1 aspect-square overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-500">
-              <img src="https://lh3.googleusercontent.com/d/1JJ_1ZDuJwSBDRdNn_6-dOe3mTomvJ6Un" alt="Kaufberatung" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A150E]/90 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-8 w-full">
-                <h3 className="font-heading text-2xl text-white mb-3">Kaufberatung</h3>
-                <p className="font-body text-sm text-[#F0EDE6]">Persönliche Begleitung bei der Suche nach Ihrer Traumimmobilie, vom ersten Gespräch bis zum Notar.</p>
-              </div>
-            </div>
-
-            {/* Card 4: Double Wide */}
-            <div className="service-card group relative col-span-1 md:col-span-2 aspect-square md:aspect-[2/1] overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-500">
-              <img src="https://lh3.googleusercontent.com/d/1LBk778aRVRXrlH0lhbEeB5BV6VIcKK75" alt="Mietverwaltung" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#1A150E]/90 via-[#1A150E]/60 to-transparent" />
-              <div className="absolute bottom-0 md:top-0 left-0 p-8 md:p-10 w-full md:w-2/3 flex flex-col justify-end md:justify-center">
-                <div className="text-[#B87333] mb-3"><IconKey /></div>
-                <h3 className="font-heading text-3xl text-white mb-3">Mietverwaltung</h3>
-                <p className="font-body text-[#F0EDE6]">Zuverlässige Verwaltung Ihrer Mietobjekte und Mieterbetreuung. Lehnen Sie sich zurück, wir kümmern uns um den Rest.</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-    );
-  };
-
-  const Philosophy = () => {
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-      let ctx = gsap.context(() => {
-        gsap.from('.philo-text', {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          },
-          y: 20,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power2.out"
-        });
-      }, sectionRef);
-      return () => ctx.revert();
-    }, []);
-
-    return (
-      <section ref={sectionRef} className="py-20 bg-[#2C2418] text-center px-6">
-        <div className="max-w-4xl mx-auto">
-          <p className="philo-text font-heading text-2xl md:text-4xl text-[#FAF7F2] leading-tight">
-            Wir vermitteln nicht nur Immobilien, <br className="hidden md:block"/> wir finden Ihr <span className="font-drama text-[#B87333] lowercase pr-1">Zuhause</span>.
-          </p>
-        </div>
-      </section>
-    );
-  };
-
-  const Process = () => {
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-      let ctx = gsap.context(() => {
-        gsap.from('.process-step', {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 70%",
-          },
-          x: (i) => i % 2 === 0 ? -50 : 50,
-          opacity: 0,
-          stagger: 0.2,
-          duration: 1,
-          ease: "power3.out"
-        });
-      }, sectionRef);
-      return () => ctx.revert();
-    }, []);
-
-    const steps = [
-      { num: "01", title: "Erstgespräch & Analyse", desc: "Wir lernen Sie und Ihre Immobilie kennen. Eine fundierte Marktanalyse bildet die Basis für den optimalen Preis." },
-      { num: "02", title: "Vermarktungsstrategie", desc: "Erstellung eines professionellen Exposés mit hochwertigen Fotos und Platzierung auf allen relevanten Kanälen." },
-      { num: "03", title: "Besichtigung & Prüfung", desc: "Wir führen diskrete Besichtigungen durch und prüfen die Bonität potenzieller Käufer im Vorfeld." },
-      { num: "04", title: "Abschluss & Übergabe", desc: "Begleitung zum Notartermin und professionelle Schlüsselübergabe. Wir sind bis zum Schluss an Ihrer Seite." }
-    ];
-
-    return (
-      <section id="prozess" ref={sectionRef} className="py-32 bg-gradient-to-b from-[#F0EDE6] to-[#FAF7F2] relative overflow-hidden">
-        {/* WATERMARK TEXT */}
-        <div className="absolute top-1/2 -translate-y-1/2 left-[-2%] text-[clamp(6rem,12vw,16rem)] font-black uppercase tracking-wider text-black opacity-[0.025] pointer-events-none z-0 transform -rotate-90 origin-left">
-          Ablauf
-        </div>
-
-        <div className="max-w-5xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="text-center mb-20">
-            <h2 className="font-heading text-4xl md:text-5xl text-[#2C2418] mb-6">Ihr Weg zum Ziel</h2>
-            <p className="font-body text-lg text-[#6B5D4F] max-w-2xl mx-auto">Ein transparenter und strukturierter Prozess garantiert Ihnen Sicherheit und den bestmöglichen Erfolg bei Ihrem Immobilienvorhaben.</p>
-          </div>
-
-          <div className="space-y-6 relative before:absolute before:inset-0 before:ml-8 md:before:ml-1/2 before:-translate-x-px md:before:mx-auto before:h-full before:w-0.5 before:bg-gradient-to-b before:from-[#B87333]/0 before:via-[#B87333]/30 before:to-[#B87333]/0">
-            
-            {steps.map((step, i) => (
-              <div key={i} className={`process-step relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group ${i !== steps.length - 1 ? 'pb-10' : ''}`}>
-                
-                {/* Connector Dot */}
-                <div className="absolute left-8 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#FAF7F2] border-2 border-[#B87333] shadow-[0_0_0_4px_#FAF7F2] z-10 group-hover:bg-[#B87333] transition-colors duration-300" />
-
-                {/* Card */}
-                <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] ml-16 md:ml-0 bg-white p-8 shadow-sm border border-[rgba(44,36,24,0.05)] relative hover:shadow-md transition-shadow">
-                  <div className="text-[#B87333]/20 font-heading text-6xl absolute top-4 right-4 pointer-events-none select-none">{step.num}</div>
-                  <h3 className="font-heading text-2xl text-[#2C2418] mb-3 relative z-10">{step.title}</h3>
-                  <p className="font-body text-[#6B5D4F] relative z-10">{step.desc}</p>
-                </div>
-
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-20 text-center">
-             <button className="inline-flex items-center justify-center px-10 py-4 bg-[#B87333] text-white font-body text-sm uppercase tracking-widest font-semibold hover:bg-[#9A5E26] transition-colors shadow-lg shadow-[#B87333]/20">
-              Jetzt Erstgespräch vereinbaren
-            </button>
-          </div>
-        </div>
-      </section>
-    );
-  };
-
-  const Testimonials = () => {
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-      let ctx = gsap.context(() => {
-        gsap.from('.testi-card', {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-          },
-          scale: 0.9,
-          y: 40,
-          opacity: 0,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "back.out(1.5)"
-        });
-      }, sectionRef);
-      return () => ctx.revert();
-    }, []);
-
-    const reviews = [
-      { name: "Thomas Berger", role: "Verkäufer", text: "Dank der professionellen Vermarktung wurde mein Haus innerhalb von 4 Wochen verkauft — über dem Angebotspreis.", featured: false },
-      { name: "Sandra Meier", role: "Käuferin", text: "Die persönliche Beratung war hervorragend. Wir haben unsere absolute Traumwohnung in Osnabrück gefunden und fühlten uns jederzeit bestens betreut.", featured: true },
-      { name: "Klaus Hoffmann", role: "Investor", text: "Seit Jahren mein vertrauensvoller Partner für Immobilieninvestments. Absolute Empfehlung für jeden in der Region.", featured: false }
-    ];
-
-    return (
-      <section ref={sectionRef} className="py-32 bg-[#EFEADD] relative overflow-hidden">
-        {/* WATERMARK TEXT */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[clamp(5rem,10vw,14rem)] font-black uppercase tracking-wider text-black opacity-[0.025] pointer-events-none z-0 whitespace-nowrap">
-          Vertrauen
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="font-heading text-4xl md:text-5xl text-[#2C2418] mb-4">Das sagen unsere Kunden</h2>
-            <p className="font-body text-[#6B5D4F]">Erfolgreiche Vermittlungen und zufriedene Gesichter.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-            {reviews.map((r, i) => (
-              <div key={i} className={`testi-card bg-white p-8 md:p-10 shadow-sm border border-[rgba(44,36,24,0.03)] flex flex-col justify-between ${r.featured ? 'md:py-14 shadow-md z-10 relative' : ''}`}>
-                <div>
-                  <div className="flex text-[#B87333] w-4 h-4 mb-6">
-                    <IconStar /><IconStar /><IconStar /><IconStar /><IconStar />
-                  </div>
-                  <p className="font-body text-lg text-[#2C2418] italic mb-8">"{r.text}"</p>
-                </div>
-                <div className="flex items-center gap-4 mt-auto">
-                  <div className="w-12 h-12 rounded-full bg-[#F0EDE6] flex items-center justify-center text-[#B87333] font-heading text-xl">
-                    {r.name.split(' ').map(n=>n[0]).join('')}
-                  </div>
-                  <div>
-                    <div className="font-heading text-[#2C2418]">{r.name}</div>
-                    <div className="font-body text-xs text-[#6B5D4F] uppercase tracking-wider">{r.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    );
-  };
-
-  const FAQ = () => {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const sectionRef = useRef(null);
-
-    const faqs = [
-      { q: "Wie läuft der Verkaufsprozess ab?", a: "Nach der kostenlosen Erstberatung erstellen wir eine Marktanalyse, professionelle Fotos und ein Exposé. Dann vermarkten wir Ihre Immobilie über alle relevanten Kanäle." },
-      { q: "Was kostet eine Immobilienbewertung?", a: "Die erste Einschätzung ist bei uns kostenlos. Ein detailliertes Wertgutachten erstellen wir auf Anfrage zu fairen Konditionen." },
-      { q: "Wie lange dauert ein Immobilienverkauf?", a: "Im Durchschnitt vermitteln wir Objekte innerhalb von 6-12 Wochen. Das hängt von Lage, Zustand und Marktlage ab." },
-      { q: "Welche Unterlagen benötige ich für den Verkauf?", a: "Grundbuchauszug, Energieausweis, Grundrisse, Wohnflächenberechnung und Baupläne. Wir helfen Ihnen gerne bei der Beschaffung." },
-      { q: "Bieten Sie auch Mietverwaltung an?", a: "Ja, wir übernehmen die komplette Verwaltung Ihrer Mietobjekte — von der Mietersuche bis zur Nebenkostenabrechnung." }
-    ];
-
-    useEffect(() => {
-      let ctx = gsap.context(() => {
-        gsap.from('.faq-content', {
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-          },
-          y: 30,
-          opacity: 0,
-          duration: 1
-        });
-      }, sectionRef);
-      return () => ctx.revert();
-    }, []);
-
-    return (
-      <section id="faq" ref={sectionRef} className="py-32 bg-[#FAF7F2]">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex flex-col lg:flex-row gap-16 faq-content">
-          
-          {/* Left: Sticky Header */}
-          <div className="lg:w-[35%] shrink-0 lg:sticky lg:top-32 self-start">
-            <h2 className="font-heading text-4xl md:text-5xl text-[#2C2418] mb-6">Häufige Fragen</h2>
-            <p className="font-body text-lg text-[#6B5D4F] mb-8">Alles was Sie wissen müssen, transparent beantwortet. Haben Sie weitere Fragen? Kontaktieren Sie uns gerne.</p>
-            <div className="hidden lg:block w-16 h-px bg-[#B87333]" />
-          </div>
-
-          {/* Right: Accordion */}
-          <div className="lg:flex-1">
-            {faqs.map((faq, i) => {
-              const isOpen = activeIndex === i;
-              return (
-                <div key={i} className="border-b border-[rgba(44,36,24,0.1)] last:border-0">
-                  <button 
-                    onClick={() => setActiveIndex(isOpen ? null : i)}
-                    className="w-full text-left py-6 md:py-8 flex justify-between items-center group"
-                  >
-                    <span className={`font-heading text-xl md:text-2xl transition-colors duration-300 pr-8 ${isOpen ? 'text-[#B87333]' : 'text-[#2C2418] group-hover:text-[#B87333]'}`}>
-                      {faq.q}
-                    </span>
-                    <span className={`text-[#2C2418] transition-transform duration-500 shrink-0 ${isOpen ? 'rotate-180 text-[#B87333]' : ''}`}>
-                      {isOpen ? <IconMinus /> : <IconPlus />}
-                    </span>
-                  </button>
-                  <div 
-                    className="grid transition-all duration-500 ease-in-out"
-                    style={{ gridTemplateRows: isOpen ? '1fr' : '0fr' }}
-                  >
-                    <div className="overflow-hidden">
-                      <p className="font-body text-[#6B5D4F] pb-8 pr-4 md:pr-12 text-lg leading-relaxed">
-                        {faq.a}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-        </div>
-      </section>
-    );
-  };
-
-  const CTA = () => {
-    return (
-      <section className="py-32 bg-white relative overflow-hidden border-t border-[rgba(44,36,24,0.05)]">
-        {/* Accent Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#B87333] rounded-full blur-[120px] opacity-10 pointer-events-none" />
-        
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <h2 className="font-heading text-5xl md:text-6xl text-[#2C2418] mb-8 leading-tight">
-            Bereit für den nächsten Schritt?
-          </h2>
-          <p className="font-body text-xl text-[#6B5D4F] mb-12 max-w-2xl mx-auto">
-            Lassen Sie uns gemeinsam herausfinden, wie wir Sie bei Ihrem Immobilienvorhaben in Osnabrück optimal unterstützen können.
-          </p>
-          <button className="inline-flex items-center justify-center px-12 py-5 bg-[#B87333] text-white font-body text-base uppercase tracking-widest font-semibold hover:bg-[#9A5E26] transition-all hover:scale-105 shadow-xl shadow-[#B87333]/20">
-            Jetzt unverbindlich anfragen
-          </button>
-          
-          <div className="mt-12 flex flex-wrap justify-center gap-6">
-            <div className="flex items-center gap-2 bg-[#FAF7F2] px-4 py-2 rounded-full text-sm font-body text-[#6B5D4F] border border-[rgba(44,36,24,0.05)]">
-              <span className="text-green-600"><IconCheck /></span> Kostenlose Erstberatung
-            </div>
-            <div className="flex items-center gap-2 bg-[#FAF7F2] px-4 py-2 rounded-full text-sm font-body text-[#6B5D4F] border border-[rgba(44,36,24,0.05)]">
-              <span className="text-green-600"><IconCheck /></span> Unverbindliche Wertermittlung
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  };
-
-  const Footer = () => {
-    return (
-      <footer className="bg-[#1A150E] pt-24 pb-12 px-6 md:px-12 border-t border-[#B87333]/20">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 mb-20">
-          
-          {/* Col 1 */}
-          <div>
-            <div className="font-heading text-3xl tracking-wide text-[#FAF7F2] mb-6">
-              Im-immobilien<span className="text-[#B87333]">.</span>
-            </div>
-            <p className="font-body text-[#A3988A] max-w-sm">
-              Ihr zuverlässiger Partner für Immobilien in Osnabrück. Wir bringen Menschen und Räume zusammen.
-            </p>
-          </div>
-
-          {/* Col 2 */}
-          <div>
-            <h4 className="font-body text-sm uppercase tracking-widest text-[#FAF7F2] font-semibold mb-6">Kontakt</h4>
-            <ul className="space-y-4 font-body text-[#A3988A]">
-              <li>Musterstraße 123<br/>49074 Osnabrück</li>
-              <li><a href="tel:+49541123456" className="hover:text-[#B87333] transition-colors">+49 (0) 541 123 456</a></li>
-              <li><a href="mailto:info@im-immobilien-os.de" className="hover:text-[#B87333] transition-colors">info@im-immobilien-os.de</a></li>
-            </ul>
-          </div>
-
-          {/* Col 3 */}
-          <div>
-            <h4 className="font-body text-sm uppercase tracking-widest text-[#FAF7F2] font-semibold mb-6">Rechtliches</h4>
-            <ul className="space-y-4 font-body text-[#A3988A]">
-              <li><a href="#" className="hover:text-[#FAF7F2] transition-colors">Impressum</a></li>
-              <li><a href="#" className="hover:text-[#FAF7F2] transition-colors">Datenschutz</a></li>
-              <li><a href="#" className="hover:text-[#FAF7F2] transition-colors">AGB</a></li>
-            </ul>
-          </div>
-
-        </div>
-        
-        <div className="max-w-7xl mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="font-body text-sm text-[#A3988A]">
-            &copy; {new Date().getFullYear()} Im-immobilien Osnabrück. Alle Rechte vorbehalten.
-          </div>
-          <div className="font-body text-sm text-[#A3988A]">
-            Design by Awwwards Winner
-          </div>
-        </div>
-      </footer>
-    );
-  };
+const RealEstateOffers = () => {
+  const offers = [
+    {
+      title: "Wohn- u. Gastronomiegebäude",
+      location: "Herford - Friedenstal",
+      price: "€ 415.000",
+      rooms: 14,
+      area: "292 m²",
+      badge: "Verkauft", img: "./assets/bild-penthouse.png", img: "./assets/bild-wohnung.png",
+      type: "Mischgebiet"
+    },
+    {
+      title: "Exklusives Einfamilienhaus mit Garten",
+      location: "Osnabrück - Sonnenhügel",
+      price: "€ 689.000",
+      rooms: 6,
+      area: "185 m²",
+      badge: "Verkauft", img: "./assets/bild-penthouse.png", img: "./assets/bild-haus.png",
+      type: "Haus"
+    },
+    {
+      title: "Moderne 3-Zimmer-Eigentumswohnung",
+      location: "Osnabrück - Wüste",
+      price: "€ 345.000",
+      rooms: 3,
+      area: "82 m²",
+      badge: "Verkauft", img: "./assets/bild-penthouse.png",
+      type: "Wohnung"
+    }
+  ];
 
   return (
-    <div className="bg-[#FAF7F2] text-[#2C2418] font-body selection:bg-[#B87333] selection:text-white">
-      <NoiseOverlay />
-      <Navbar />
-      <main>
-        <Hero />
-        <Features />
-        <Services />
-        <Philosophy />
-        <Process />
-        <Testimonials />
-        <FAQ />
-        <CTA />
-      </main>
-      <Footer />
-    </div>
+    <section className="py-24 bg-[#F0F2F5] gradient-fade-top relative" id="angebote">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 reveal">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Erfolgreich vermittelt</h2>
+            <p className="text-slate-600 text-lg">Eine Auswahl unserer zuletzt vermittelten Objekte im Osnabrücker Land.</p>
+          </div>
+          
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {offers.map((offer, idx) => (
+            <div key={idx} className="reveal card-shimmer bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden group" style={{ transitionDelay: `${idx * 0.15}s` }}>
+              <div className="h-56 bg-slate-200 relative overflow-hidden">
+                <img src={offer.img} alt={offer.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute top-4 left-4 bg-[#BF0101] text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md z-10 uppercase tracking-wider">
+                  {offer.badge}
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="text-3xl font-bold text-slate-900 mb-2">{offer.price}</div>
+                <h3 className="text-lg font-bold text-slate-800 mb-1 line-clamp-1">{offer.title}</h3>
+                <div className="text-slate-500 text-sm mb-6 flex items-center gap-1">
+                  <svg viewBox="0 0 24 24" width={14} height={14} fill="none" stroke="currentColor" strokeWidth="2">
+                    <><><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></></>
+                  </svg>
+                  {offer.location}
+                </div>
+                
+                <div className="flex items-center gap-4 pt-4 border-t border-slate-100 text-sm font-medium text-slate-700">
+                  <div className="flex items-center gap-1.5">
+                    <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-400">
+                      <><><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><polyline points="9 22 9 12 15 12 15 22" /></></>
+                    </svg>
+                    {offer.rooms} Zi.
+                  </div>
+                  <div className="w-1 h-1 rounded-full bg-slate-300"></div>
+                  <div className="flex items-center gap-1.5">
+                    <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth="2" className="text-slate-400">
+                      <><><path d="M8 3H5a2 2 0 0 0-2 2v3" /><path d="M21 8V5a2 2 0 0 0-2-2h-3" /><path d="M3 16v3a2 2 0 0 0 2 2h3" /><path d="M16 21h3a2 2 0 0 0 2-2v-3" /></></>
+                    </svg>
+                    {offer.area}
+                  </div>
+                  <div className="w-1 h-1 rounded-full bg-slate-300"></div>
+                  <div className="text-slate-500">{offer.type}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Process = () => {
+  const steps = [
+    {
+      title: "Kostenlose Bewertung",
+      desc: "Sie rufen an, wir kommen vorbei. Innerhalb von 48 Stunden erhalten Sie eine fundierte Marktwertanalyse — kostenlos und unverbindlich.",
+      variant: "process-card-glow"
+    },
+    {
+      title: "Vermarktungsstrategie",
+      desc: "Gemeinsam legen wir den optimalen Angebotspreis fest und erstellen ein hochwertiges Exposé mit professionellen Fotos.",
+      variant: "process-card-accent"
+    },
+    {
+      title: "Käufer finden & prüfen",
+      desc: "Wir filtern Interessenten vor — nur Käufer mit Finanzierungsnachweis bekommen einen Besichtigungstermin. Keine Besichtigungstouristen.",
+      variant: "process-card-ring"
+    },
+    {
+      title: "Notartermin & Übergabe",
+      desc: "Wir begleiten die Kaufpreisverhandlung, koordinieren den Notartermin und stehen Ihnen bis zur Schlüsselübergabe zur Seite.",
+      variant: "process-card-slide"
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-[#F8FAFC] watermark relative" data-watermark="ABLAUF" id="ablauf">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="text-center max-w-2xl mx-auto mb-20 reveal">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">So läuft Ihr Verkauf ab</h2>
+          <p className="text-slate-600 text-lg">Vier Schritte — von der Bewertung bis zur Schlüsselübergabe.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, idx) => (
+            <div 
+              key={idx} 
+              className={`reveal process-card ${step.variant} bg-white p-8 rounded-2xl shadow-sm border border-slate-200 h-full flex flex-col`}
+              style={{ transitionDelay: `${idx * 0.15}s` }}
+            >
+              <div className="step-number">0{idx + 1}</div>
+              <div className="relative z-10 flex-grow">
+                <div className="w-10 h-10 rounded-full bg-[#BF0101] text-white flex items-center justify-center font-bold mb-6 shadow-md">
+                  {idx + 1}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-3">{step.title}</h3>
+                <p className="text-slate-600 leading-relaxed">{step.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-20 text-center reveal">
+          <a href="#bewertung" className="inline-flex items-center justify-center px-8 py-4 bg-[#BF0101] text-white font-medium rounded-full hover:bg-red-800 transition-colors text-lg cta-pulse">
+            Jetzt Erstgespräch vereinbaren
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ValuationMockup = () => {
+  return (
+    <section className="py-24 bg-[#F0F2F5] accent-line-top relative overflow-hidden" id="bewertung">
+      <div className="absolute right-0 top-0 w-1/2 h-full bg-slate-200/50 skew-x-12 translate-x-32 z-0 hidden lg:block"></div>
+      
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="reveal">
+            <div className="inline-block px-3 py-1 bg-[#BF0101] text-white text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
+              Kostenloser Service
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Was ist Ihre Immobilie wert?</h2>
+            <p className="text-slate-600 text-lg mb-8 leading-relaxed">
+              Sie überlegen zu verkaufen? Der erste Schritt: Wissen, was Ihre Immobilie auf dem aktuellen Markt wert ist. Wir analysieren Lage, Zustand und Vergleichsobjekte in Ihrer Nachbarschaft.
+            </p>
+            <ul className="space-y-4 mb-10">
+              {[
+                "Bewertung auf Basis von 187+ Vergleichsobjekten",
+                "Mikrolagen-Analyse: Bad Essen, Bohmte, Osnabrück",
+                "Ergebnis in 48 Stunden — kostenlos und diskret"
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <div className="mt-1 w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0">
+                    <svg viewBox="0 0 24 24" width={14} height={14} fill="none" stroke="currentColor" strokeWidth="3">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </div>
+                  <span className="text-slate-700 font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="reveal bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-slate-100 relative">
+            <div className="absolute -top-4 -right-4 w-24 h-24 bg-dots opacity-50 z-0"></div>
+            <div className="relative z-10">
+              <h3 className="text-xl font-bold text-slate-900 mb-6 border-b border-slate-100 pb-4">Eckdaten eingeben</h3>
+              <div className="space-y-5">
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1.5">Immobilienart</label>
+                  <select className="w-full h-12 bg-slate-50 border border-slate-200 rounded-lg px-4 text-slate-700 outline-none focus:border-[#BF0101] transition-colors"><option value="">Bitte wählen...</option><option>Haus</option><option>Wohnung</option><option>Grundstück</option><option>Gewerbe</option></select>
+                </div>
+                <div className="grid grid-cols-2 gap-5">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">Wohnfläche (m²)</label>
+                    <input type="text" placeholder="z.B. 120" className="w-full h-12 bg-slate-50 border border-slate-200 rounded-lg px-4 text-slate-700 placeholder-slate-400 outline-none focus:border-[#BF0101] transition-colors" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-700 mb-1.5">Zimmer</label>
+                    <input type="text" placeholder="z.B. 4" className="w-full h-12 bg-slate-50 border border-slate-200 rounded-lg px-4 text-slate-700 placeholder-slate-400 outline-none focus:border-[#BF0101] transition-colors" />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1.5">Postleitzahl / Ort</label>
+                  <input type="text" placeholder="z.B. 49152 Bad Essen" className="w-full h-12 bg-slate-50 border border-slate-200 rounded-lg px-4 text-slate-700 placeholder-slate-400 outline-none focus:border-[#BF0101] transition-colors" />
+                </div>
+                <button className="w-full h-14 bg-[#BF0101] text-white font-bold rounded-xl mt-4 hover:bg-red-800 transition-colors shadow-lg shadow-red-900/20 flex items-center justify-center gap-2">
+                  Kostenlose Bewertung anfordern
+                  <svg viewBox="0 0 24 24" width={20} height={20} fill="none" stroke="currentColor" strokeWidth="2">
+                    <><><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></></>
+                  </svg>
+                </button>
+                <p className="text-center text-xs text-slate-400 mt-4">Ihre Daten werden vertraulich behandelt.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const AboutUs = () => {
+  return (
+    <section className="py-24 bg-[#F8FAFC] relative" id="ueber-uns">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="reveal relative">
+            <div className="absolute -inset-4 bg-[#BF0101]/5 rounded-[2rem] transform -rotate-3 z-0"></div>
+            <img 
+              src="./assets/img-about.png" 
+              alt="Büro IM Immobilien GmbH Bad Essen" 
+              className="w-full h-[600px] object-cover rounded-2xl shadow-xl relative z-10"
+            />
+            <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 z-20 max-w-xs">
+              <div className="text-[#BF0101] font-bold text-xl mb-1">Martin Berkenkamp &</div>
+              <div className="text-[#BF0101] font-bold text-xl mb-2">Ingo Christoffer</div>
+              <div className="text-slate-500 text-sm">Geschäftsführer & Gründer</div>
+            </div>
+          </div>
+          
+          <div className="reveal">
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Zwei Geschäftsführer. Ein Versprechen.</h2>
+            <p className="text-slate-600 text-lg mb-6 leading-relaxed">
+              Bei IM Immobilien gibt es kein Callcenter und keine wechselnden Ansprechpartner. Ingo Christoffer und Martin Berkenkamp betreuen jeden Kunden persönlich.
+            </p>
+            <p className="text-slate-600 text-lg mb-10 leading-relaxed">
+              Vom ersten Telefonat bis zur Schlüsselübergabe haben Sie zwei erfahrene Makler an Ihrer Seite, die den Markt im Osnabrücker Land kennen wie ihre eigene Nachbarschaft.
+            </p>
+            
+            <blockquote className="border-l-4 border-[#BF0101] pl-6 py-2 mb-10">
+              <p className="font-drama text-2xl md:text-3xl text-slate-800 leading-snug">
+                "Wir sagen Ihnen ehrlich, was Ihre Immobilie wert ist. Auch wenn die Zahl nicht die ist, die Sie hören wollen."
+              </p>
+            </blockquote>
+            
+            <div className="grid grid-cols-2 gap-6">
+              <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                <div className="text-[#BF0101] font-bold text-2xl mb-1">187</div>
+                <div className="text-slate-600 text-sm">Vermittelte Objekte</div>
+              </div>
+              <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                <div className="text-[#BF0101] font-bold text-2xl mb-1">2</div>
+                <div className="text-slate-600 text-sm">Persönliche Ansprechpartner</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Testimonials = () => {
+  const reviews = [
+    {
+      name: "Claudia M.",
+      role: "Verkauf Doppelhaushälfte, Bad Essen",
+      text: "Wir hatten unser Haus 5 Monate privat inseriert — ohne ein einziges ernstes Angebot. Herr Berkenkamp hat innerhalb von 4 Wochen den Kaufvertrag zum Wunschpreis abgeschlossen. Hätten wir das mal früher gemacht.",
+      initials: "CM"
+    },
+    {
+      name: "Ralf & Sabine K.",
+      role: "Verkauf Eigentumswohnung, Osnabrück",
+      text: "Was uns überzeugt hat: Herr Christoffer hat von Anfang an offen gesagt, was realistisch ist. Kein Schönreden, keine falschen Erwartungen. Am Ende lag der Preis sogar 8.000 Euro über der Bewertung.",
+      initials: "RK"
+    },
+    {
+      name: "Andreas B.",
+      role: "Kauf Gewerbegrundstück, Bohmte",
+      text: "Ich habe ein Jahr lang selbst gesucht. Ein Anruf bei IM Immobilien und drei Wochen später hatte ich mein Grundstück. Die kennen hier jeden Quadratmeter.",
+      initials: "AB"
+    }
+  ];
+
+  const Star = () => (
+    <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-yellow-400">
+      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+    </svg>
+  );
+
+  return (
+    <section className="py-24 bg-[#F0F2F5] relative">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center max-w-2xl mx-auto mb-16 reveal">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Das sagen unsere Kunden</h2>
+          <p className="text-slate-600 text-lg">Was Eigentümer und Käufer über die Zusammenarbeit sagen.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {reviews.map((rev, idx) => (
+            <div key={idx} className="reveal card-shimmer bg-white p-8 rounded-2xl shadow-sm border border-slate-200 relative" style={{ transitionDelay: `${idx * 0.15}s` }}>
+              <div className="absolute top-8 right-8 text-slate-100">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14.017 21L16.417 14.594C16.892 13.25 17.5 12.062 18.25 11.031C18.983 9.969 19.825 8.969 20.775 8.031L18.975 6.231C17.675 7.531 16.5 8.931 15.45 10.431C14.4 11.931 13.567 13.531 12.95 15.231L14.017 21ZM4.017 21L6.417 14.594C6.892 13.25 7.5 12.062 8.25 11.031C8.983 9.969 9.825 8.969 10.775 8.031L8.975 6.231C7.675 7.531 6.5 8.931 5.45 10.431C4.4 11.931 3.567 13.531 2.95 15.231L4.017 21Z" />
+                </svg>
+              </div>
+              <div className="flex gap-1 mb-6">
+                <Star /><Star /><Star /><Star /><Star />
+              </div>
+              <p className="text-slate-700 text-lg mb-8 relative z-10 italic">"{rev.text}"</p>
+              <div className="flex items-center gap-4 mt-auto">
+                <div className="w-12 h-12 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-slate-600">
+                  {rev.initials}
+                </div>
+                <div>
+                  <div className="font-bold text-slate-900">{rev.name}</div>
+                  <div className="text-sm text-slate-500">{rev.role}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const FAQ = () => {
+  const faqs = [
+    {
+      q: "Was kostet die Immobilienbewertung?",
+      a: "Nichts. Die Erstbewertung ist für Sie kostenlos und unverbindlich. Sie erhalten eine fundierte Einschätzung auf Basis aktueller Vergleichsdaten aus Ihrer Region — ohne Verpflichtung."
+    },
+    {
+      q: "Wie lange dauert es, bis meine Immobilie verkauft ist?",
+      a: "Bei realistischer Preisgestaltung vermitteln wir die meisten Objekte innerhalb von 3 bis 6 Wochen. In einem persönlichen Gespräch schätzen wir die Vermarktungsdauer für Ihr Objekt ein."
+    },
+    {
+      q: "Wer zahlt die Maklerprovision?",
+      a: "Seit Dezember 2020 gilt: Käufer und Verkäufer teilen sich die Provision je zur Hälfte. Die genauen Konditionen besprechen wir transparent im Erstgespräch — keine versteckten Kosten."
+    },
+    {
+      q: "Brauche ich einen Energieausweis für den Verkauf?",
+      a: "Ja, der Energieausweis ist gesetzlich Pflicht. Wir organisieren die Erstellung für Sie — schnell und unkompliziert, damit dem Verkauf nichts im Weg steht."
+    },
+    {
+      q: "Was unterscheidet Sie von anderen Maklern in der Region?",
+      a: "Wir sind zwei Geschäftsführer, die jeden Kunden persönlich betreuen. Bei uns landen Sie nicht bei einem Callcenter oder wechselnden Ansprechpartnern. Ingo Christoffer und Martin Berkenkamp — vom ersten Gespräch bis zum Notartermin."
+    }
+  ];
+
+  return (
+    <section className="py-24 bg-[#F8FAFC] bg-glow-tl relative">
+      <div className="max-w-3xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-16 reveal">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Häufige Fragen</h2>
+          <p className="text-slate-600 text-lg">Die wichtigsten Fragen rund um Bewertung, Verkauf und Provision.</p>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((faq, idx) => (
+            <details key={idx} className="reveal group bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden" style={{ transitionDelay: `${idx * 0.1}s` }}>
+              <summary className="flex justify-between items-center p-6 cursor-pointer font-bold text-lg text-slate-900 hover:text-[#BF0101] transition-colors select-none">
+                {faq.q}
+                <svg className="w-6 h-6 text-slate-400 transition-transform duration-300 group-open:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </summary>
+              <div className="px-6 pb-6 text-slate-600 leading-relaxed border-t border-slate-50 mt-2 pt-4">
+                {faq.a}
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const CTA = () => {
+  return (
+    <section className="py-24 bg-[#0F172A] relative overflow-hidden" id="kontakt">
+      <div className="absolute inset-0 bg-glow-tl opacity-20 pointer-events-none"></div>
+      <div className="absolute right-0 bottom-0 w-96 h-96 bg-[#BF0101] rounded-full filter blur-[120px] opacity-20 pointer-events-none"></div>
+      
+      <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+        <h2 className="reveal text-4xl md:text-5xl font-bold text-white mb-6">
+          Bereit für den nächsten Schritt?
+        </h2>
+        <p className="reveal text-slate-300 text-xl mb-12 max-w-2xl mx-auto" style={{ transitionDelay: '0.1s' }}>
+          Rufen Sie uns an oder fordern Sie Ihre kostenlose Bewertung an. Innerhalb von 48 Stunden wissen Sie, was Ihre Immobilie wert ist.
+        </p>
+        
+        <div className="reveal flex flex-col sm:flex-row justify-center items-center gap-6 mb-16" style={{ transitionDelay: '0.2s' }}>
+          <a href="mailto:info@im-immobilien.eu" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-[#BF0101] text-white font-bold rounded-full hover:bg-red-700 transition-colors text-lg cta-pulse shadow-xl shadow-red-900/30">
+            Jetzt Kontakt aufnehmen
+          </a>
+          <a href="tel:01764350716" className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-4 bg-white/10 text-white font-bold rounded-full hover:bg-white/20 transition-colors text-lg border border-white/20 backdrop-blur-sm">
+            0176 43 507 169
+          </a>
+        </div>
+
+        <div className="reveal flex flex-wrap justify-center gap-4" style={{ transitionDelay: '0.3s' }}>
+          {["Kostenlose Erstberatung", "Unverbindlich", "Faire Bewertung"].map((chip, i) => (
+            <div key={i} className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-slate-300 text-sm flex items-center gap-2">
+              <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="#4ade80" strokeWidth="2">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+              {chip}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const Footer = () => {
+  return (
+    <footer className="bg-[#020617] pt-20 pb-10 border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+          <div>
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-8 h-8 bg-[#BF0101] text-white flex items-center justify-center rounded font-bold text-sm tracking-tighter">
+                IM
+              </div>
+              <span className="font-bold text-xl tracking-tight text-white">IM Immobilien</span>
+            </div>
+            <p className="text-slate-400 mb-6 max-w-sm">
+              IM Immobilien GmbH — Ingo Christoffer & Martin Berkenkamp. Kostenlose Immobilienbewertung und Verkauf im Osnabrücker Land.
+            </p>
+          </div>
+          
+          <div>
+            <h4 className="text-white font-bold mb-6">Kontakt</h4>
+            <ul className="space-y-4 text-slate-400">
+              <li className="flex items-start gap-3">
+                <svg className="w-5 h-5 shrink-0 mt-0.5 text-[#BF0101]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <><><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></></>
+                </svg>
+                <span>Gerdensiek 8<br/>49152 Bad Essen</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <svg className="w-5 h-5 shrink-0 text-[#BF0101]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></>
+                </svg>
+                <a href="tel:01764350716" className="hover:text-white transition-colors">0176 43 507 169</a>
+                <span className="mx-1 text-slate-600">|</span>
+                <a href="tel:01757466174" className="hover:text-white transition-colors">0175 74 661 74</a>
+              </li>
+              <li className="flex items-center gap-3">
+                <svg className="w-5 h-5 shrink-0 text-[#BF0101]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <><><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></></>
+                </svg>
+                <a href="mailto:info@im-immobilien.eu" className="hover:text-white transition-colors">info@im-immobilien.eu</a>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 className="text-white font-bold mb-6">Rechtliches</h4>
+            <ul className="space-y-3 text-slate-400">
+              <li><a href="impressum.html" className="hover:text-[#BF0101] transition-colors">Impressum</a></li>
+              <li><a href="datenschutz.html" className="hover:text-[#BF0101] transition-colors">Datenschutz</a></li>
+              <li><a href="#" className="hover:text-[#BF0101] transition-colors">AGB</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div className="pt-8 border-t border-white/10 text-center text-slate-500 text-sm flex flex-col md:flex-row justify-between items-center">
+          <p>&copy; {new Date().getFullYear()} IM Immobilien GmbH. Alle Rechte vorbehalten.</p>
+          
+        </div>
+      </div>
+    </footer>
   );
 };
 
@@ -662,12 +910,386 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
   </script>
   
+  <!-- Reveal Observer: Triggers CSS animations when sections scroll into view -->
+  <script>
+  (function() {
+    function initReveal() {
+      var els = document.querySelectorAll(".reveal");
+      if (!els.length) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+      els.forEach(function(el) { observer.observe(el); });
+    }
+    /* Wait for React to render, then init observer */
+    var checkInterval = setInterval(function() {
+      if (document.querySelectorAll(".reveal").length > 0) {
+        clearInterval(checkInterval);
+        setTimeout(initReveal, 100);
+      }
+    }, 200);
+    /* Ultimate failsafe: force all content visible after 6s */
+    setTimeout(function() {
+      clearInterval(checkInterval);
+      document.querySelectorAll(".reveal:not(.revealed)").forEach(function(el) {
+        el.classList.add("revealed");
+      });
+    }, 6000);
+  })();
+  </script>
+  
   <noscript>
     <div style="text-align:center;padding:4rem;font-family:system-ui;">
-      <h1>Im-immobilien Osnabrück</h1>
+      <h1>IM Immobilien GmbH</h1>
       <p>Bitte aktivieren Sie JavaScript.</p>
-      <p>Telefon: </p>
+      <p>Telefon: 0176 43 507 169 | 0175 74 661 74</p>
     </div>
   </noscript>
+
+<div id="oc-form-modal" class="oc-form-overlay" style="display:none;">
+  <div class="oc-form-backdrop" id="oc-form-backdrop"></div>
+  <div class="oc-form-container">
+    <button class="oc-form-close" id="oc-form-close-btn" aria-label="Schliessen">&times;</button>
+    
+    <h2 class="oc-form-title">Kostenlose Bewertung anfordern</h2>
+    <p class="oc-form-subtitle">Wir freuen uns auf Ihre Anfrage</p>
+    <form id="oc-contact-form" novalidate>
+      <div style="position:absolute;left:-9999px;height:0;overflow:hidden;" aria-hidden="true">
+        <input name="oc_hp_2yyh" tabindex="-1" autocomplete="off">
+        <input name="oc_ts" type="hidden" value="">
+      </div>
+      <div class="oc-form-group"><label class="oc-form-label" for="oc-f-name">Ihr Name <span style="color:#ef4444;">*</span></label><input type="text" id="oc-f-name" name="name" placeholder="Ihr Name" required class="oc-form-input"><div class="oc-form-error" id="oc-err-name"></div></div>
+      <div class="oc-form-group"><label class="oc-form-label" for="oc-f-email">E-Mail-Adresse <span style="color:#ef4444;">*</span></label><input type="email" id="oc-f-email" name="email" placeholder="E-Mail-Adresse" required class="oc-form-input"><div class="oc-form-error" id="oc-err-email"></div></div>
+      <div class="oc-form-group"><label class="oc-form-label" for="oc-f-phone">Telefonnummer</label><input type="tel" id="oc-f-phone" name="phone" placeholder="Telefonnummer"  class="oc-form-input"><div class="oc-form-error" id="oc-err-phone"></div></div>
+      <div class="oc-form-group"><label class="oc-form-label" for="oc-f-message">Ihre Nachricht <span style="color:#ef4444;">*</span></label><textarea id="oc-f-message" name="message" rows="4" placeholder="Ihre Nachricht" required class="oc-form-input oc-form-textarea"></textarea><div class="oc-form-error" id="oc-err-message"></div></div>
+      <button type="submit" class="oc-form-submit" id="oc-form-btn">
+        <span id="oc-form-btn-text">Nachricht senden</span>
+      </button>
+    </form>
+    <div id="oc-form-success" style="display:none;">
+      <svg class="oc-form-checkmark" viewBox="0 0 52 52"><circle cx="26" cy="26" r="25"/><path fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+      <div class="oc-form-success-title">Nachricht gesendet!</div>
+      <div class="oc-form-success-text">Vielen Dank fuer Ihre Nachricht! Wir melden uns in Kuerze bei Ihnen.</div>
+    </div>
+  </div>
+</div>
+
+<script id="oc-form-script">
+(function(){
+  var SLUG = "im-immobilien-osnabrueck-6qng";
+  var SUBMIT_URL = "http://152.53.182.209:19991/" + SLUG + "/submit";
+  var HP_FIELD = "oc_hp_2yyh";
+  var IS_MODAL = true;
+  var FIELDS = [{"id":"name","type":"text","required":true,"label":"Ihr Name"},{"id":"email","type":"email","required":true,"label":"E-Mail-Adresse"},{"id":"phone","type":"tel","required":false,"label":"Telefonnummer"},{"id":"message","type":"textarea","required":true,"label":"Ihre Nachricht"}];
+
+  // Track form load time for bot detection
+  var loadTime = Date.now();
+
+  function initForm() {
+    var form = document.getElementById("oc-contact-form");
+    if (!form) return;
+
+    // Set timestamp in hidden field
+    var tsField = form.querySelector('input[name="oc_ts"]');
+    if (tsField) tsField.value = String(loadTime);
+
+    // ─── Modal open/close ───────────────────────────────
+    var modal = document.getElementById("oc-form-modal");
+    var backdrop = document.getElementById("oc-form-backdrop");
+    var closeBtn = document.getElementById("oc-form-close-btn");
+
+    function openModal() {
+      if (!modal) return;
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      setTimeout(function() { modal.classList.add("oc-form-visible"); }, 10);
+      // Focus first input
+      var first = form.querySelector("input:not([type=hidden]), textarea, select");
+      if (first) setTimeout(function() { first.focus(); }, 300);
+    }
+
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.remove("oc-form-visible");
+      setTimeout(function() {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+      }, 300);
+    }
+
+    if (IS_MODAL) {
+      if (backdrop) backdrop.addEventListener("click", closeModal);
+      if (closeBtn) closeBtn.addEventListener("click", closeModal);
+      document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape" && modal && modal.style.display !== "none") closeModal();
+      });
+    }
+
+    // ─── Inline: inject into CTA section ────────────────
+    if (!IS_MODAL) {
+      var inlineWrap = document.getElementById("oc-form-inline-wrap");
+      if (inlineWrap) {
+        // Find CTA section (last section before footer, or section with cta-related classes)
+        var sections = document.querySelectorAll("section");
+        var ctaSection = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+          var cls = (sections[i].className || "").toLowerCase();
+          var id = (sections[i].id || "").toLowerCase();
+          if (cls.indexOf("cta") !== -1 || id.indexOf("cta") !== -1 || cls.indexOf("contact") !== -1 || id.indexOf("contact") !== -1) {
+            ctaSection = sections[i];
+            break;
+          }
+        }
+        // Fallback: second-to-last section (before footer section)
+        if (!ctaSection && sections.length >= 2) {
+          ctaSection = sections[sections.length - 1];
+        }
+        if (ctaSection) {
+          // Keep section styling but replace inner content
+          var inner = ctaSection.querySelector("div[class*='max-w'], div[class*='container']") || ctaSection;
+          // Center the form
+          inlineWrap.style.display = "block";
+          inner.innerHTML = "";
+          inner.appendChild(inlineWrap);
+        }
+      }
+    }
+
+    // ─── Button rewiring ────────────────────────────────
+    function rewireButtons() {
+      var selectors = [
+        ".cta-pulse",
+        "button[class*='cta']",
+        "a[class*='cta']",
+        'a[href*="kontakt"]',
+        'a[href*="anfrage"]',
+        'a[href*="contact"]',
+        'a[href="#kontakt"]',
+        'a[href="#contact"]',
+        'a[href*="mailto:"]'
+      ];
+      var allBtns = [];
+      selectors.forEach(function(sel) {
+        try {
+          var els = document.querySelectorAll(sel);
+          for (var j = 0; j < els.length; j++) allBtns.push(els[j]);
+        } catch(e) {}
+      });
+
+      // Deduplicate
+      var seen = new Set();
+      allBtns.forEach(function(btn) {
+        if (seen.has(btn)) return;
+        seen.add(btn);
+        // Skip form-internal buttons
+        if (btn.closest && (btn.closest("#oc-form-modal") || btn.closest("#oc-form-inline-wrap") || btn.closest("nav") || btn.closest("header"))) return;
+        // Skip footer links that are navigation
+        if (btn.closest && btn.closest("footer")) {
+          var href = btn.getAttribute("href") || "";
+          if (href.indexOf(".html") !== -1 || href === "/" || href === "#") return;
+        }
+
+        btn.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (IS_MODAL) {
+            openModal();
+          } else {
+            var formEl = document.getElementById("oc-contact-form");
+            if (formEl) formEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        });
+      });
+    }
+
+    // Wait for React to render, then rewire
+    setTimeout(rewireButtons, 500);
+    setTimeout(rewireButtons, 1500);
+    setTimeout(rewireButtons, 3000);
+
+    // ─── Validation ─────────────────────────────────────
+    function validateField(fieldDef, value) {
+      if (fieldDef.required && !value.trim()) return fieldDef.label + " ist erforderlich.";
+      if (fieldDef.type === "email" && value.trim()) {
+        var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRe.test(value.trim())) return "Bitte geben Sie eine gueltige E-Mail-Adresse ein.";
+      }
+      if (fieldDef.type === "tel" && value.trim()) {
+        var telRe = /^[+]?[\d\s\-().]{6,20}$/;
+        if (!telRe.test(value.trim())) return "Bitte geben Sie eine gueltige Telefonnummer ein.";
+      }
+      return "";
+    }
+
+    function showError(fieldId, msg) {
+      var input = document.getElementById("oc-f-" + fieldId);
+      var errEl = document.getElementById("oc-err-" + fieldId);
+      if (msg) {
+        if (input) input.classList.add("oc-form-input-error");
+        if (errEl) errEl.textContent = msg;
+      } else {
+        if (input) input.classList.remove("oc-form-input-error");
+        if (errEl) errEl.textContent = "";
+      }
+    }
+
+    // Live validation on blur
+    FIELDS.forEach(function(fd) {
+      var el = document.getElementById("oc-f-" + fd.id);
+      if (el) {
+        el.addEventListener("blur", function() {
+          showError(fd.id, validateField(fd, el.value));
+        });
+        el.addEventListener("input", function() {
+          if (el.classList.contains("oc-form-input-error")) {
+            showError(fd.id, validateField(fd, el.value));
+          }
+        });
+      }
+    });
+
+    // ─── Submit ─────────────────────────────────────────
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // Honeypot check
+      var hpEl = form.querySelector('input[name="' + HP_FIELD + '"]');
+      if (hpEl && hpEl.value) return;
+
+      // Bot timing check (< 2s = suspicious)
+      var elapsed = Date.now() - loadTime;
+      if (elapsed < 2000) return;
+
+      // Validate all fields
+      var hasError = false;
+      var data = {};
+      FIELDS.forEach(function(fd) {
+        var el = document.getElementById("oc-f-" + fd.id);
+        var val = el ? el.value : "";
+        var err = validateField(fd, val);
+        showError(fd.id, err);
+        if (err) hasError = true;
+        data[fd.id] = val.trim();
+      });
+      if (hasError) return;
+
+      // Disable button, show spinner
+      var btn = document.getElementById("oc-form-btn");
+      var btnText = document.getElementById("oc-form-btn-text");
+      btn.disabled = true;
+      btnText.innerHTML = "Wird gesendet... <span class='oc-form-submit-spinner'></span>";
+
+      // Send
+      fetch(SUBMIT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ fields: data, ts: loadTime })
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(result) {
+        if (result.ok) {
+          form.style.display = "none";
+          document.getElementById("oc-form-success").style.display = "block";
+        } else {
+          throw new Error(result.error || "Fehler");
+        }
+      })
+      .catch(function() {
+        btn.disabled = false;
+        btnText.textContent = "Nachricht senden";
+        // Show fallback error
+        var errDiv = document.createElement("div");
+        errDiv.style.cssText = "text-align:center;color:#ef4444;font-size:0.85rem;margin-top:1rem;";
+        errDiv.textContent = "Senden fehlgeschlagen. Bitte versuchen Sie es erneut oder schreiben Sie an " + "dustin.althaus@me.com";
+        form.appendChild(errDiv);
+        setTimeout(function() { errDiv.remove(); }, 5000);
+      });
+    });
+  }
+
+  // Init after React render
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function() { setTimeout(initForm, 600); });
+  } else {
+    setTimeout(initForm, 600);
+  }
+})();
+</script>
+<script id="oc-analytics-script">(function(){
+  var SLUG="im-immobilien-osnabrueck-6qng";
+  var EP="http://152.53.182.209:19991";
+  var KEY="oc_visit_"+SLUG;
+  var consent=window.__oc_analytics_consent;
+  if(consent===false)return;
+  function hasCookieBanner(){return!!document.getElementById("oc-cookie-banner")}
+  function waitConsent(cb){
+    if(!hasCookieBanner()){cb();return}
+    var i=setInterval(function(){
+      var c=window.__oc_analytics_consent;
+      if(c===true){clearInterval(i);cb()}
+      else if(c===false){clearInterval(i)}
+    },1000);
+    setTimeout(function(){clearInterval(i)},30000);
+  }
+  function track(){
+    var isUnique=!sessionStorage.getItem(KEY);
+    if(isUnique)sessionStorage.setItem(KEY,"1");
+    var d={
+      s:SLUG,
+      p:location.pathname||"/",
+      r:document.referrer||"",
+      u:isUnique?1:0,
+      w:screen.width||0,
+      l:navigator.language||"de"
+    };
+    if(navigator.sendBeacon){
+      navigator.sendBeacon(EP+"/"+SLUG+"/track",JSON.stringify(d));
+    }else{
+      var x=new XMLHttpRequest();
+      x.open("POST",EP+"/"+SLUG+"/track");
+      x.setRequestHeader("Content-Type","application/json");
+      x.send(JSON.stringify(d));
+    }
+  }
+  if(consent===true||!hasCookieBanner()){track()}
+  else{waitConsent(track)}
+})();</script>
+<div id="oc-cookie-banner" role="dialog" aria-label="Cookie-Hinweis">
+  <div id="oc-cookie-box">
+    <p>Diese Website nutzt Cookies, um Ihnen das beste Erlebnis zu bieten. Erfahren Sie mehr in unserer <a href="datenschutz.html">Datenschutzerklaerung</a></p>
+    <div class="oc-cookie-buttons">
+      <button class="oc-cookie-btn oc-cookie-btn-accept" id="oc-cookie-accept">Alle akzeptieren</button>
+      <button class="oc-cookie-btn oc-cookie-btn-decline" id="oc-cookie-decline">Nur notwendige</button>
+    </div>
+  </div>
+</div>
+<script id="oc-cookie-script">(function(){
+  var KEY = "oc_consent";
+  var consent = localStorage.getItem(KEY);
+  if (consent) {
+    window.__oc_analytics_consent = consent === "all";
+    return;
+  }
+  var banner = document.getElementById("oc-cookie-banner");
+  if (!banner) return;
+  setTimeout(function(){ banner.classList.add("oc-cookie-visible"); }, 500);
+  document.getElementById("oc-cookie-accept").addEventListener("click", function(){
+    localStorage.setItem(KEY, "all");
+    window.__oc_analytics_consent = true;
+    banner.classList.remove("oc-cookie-visible");
+    setTimeout(function(){ banner.remove(); }, 400);
+  });
+  document.getElementById("oc-cookie-decline").addEventListener("click", function(){
+    localStorage.setItem(KEY, "essential");
+    window.__oc_analytics_consent = false;
+    banner.classList.remove("oc-cookie-visible");
+    setTimeout(function(){ banner.remove(); }, 400);
+  });
+})();</script>
 </body>
 </html>
